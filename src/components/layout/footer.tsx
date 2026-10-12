@@ -17,6 +17,12 @@ export function Footer() {
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
               {siteConfig.description}
             </p>
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="mt-3 inline-block text-sm font-medium text-primary transition-colors hover:text-primary/80"
+            >
+              {siteConfig.email}
+            </a>
           </div>
 
           <div>
