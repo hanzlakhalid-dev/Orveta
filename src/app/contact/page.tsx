@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Mail } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { ContactActions } from "@/components/contact/contact-actions";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -26,9 +26,7 @@ export default function ContactPage() {
         </p>
 
         <div className="mt-8">
-          <Button asChild size="lg">
-            <a href={`mailto:${siteConfig.email}`}>Email {siteConfig.email}</a>
-          </Button>
+          <ContactActions email={siteConfig.email} />
         </div>
 
         <p className="mt-6 text-sm text-muted-foreground">
