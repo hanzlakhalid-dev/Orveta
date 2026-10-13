@@ -76,6 +76,21 @@ export default function PrivacyPage() {
               </a>
               .
             </p>
+            <p className="mt-3 leading-relaxed">
+              We also use Microsoft Clarity, a behavior analytics tool, to see how visitors
+              interact with our pages (for example clicks and scrolling) so we can improve the
+              site. Clarity uses cookies and may capture session recordings and heatmaps. You can
+              read how Microsoft handles this data in the{" "}
+              <a
+                href="https://privacy.microsoft.com/privacystatement"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline-offset-4 hover:underline"
+              >
+                Microsoft Privacy Statement
+              </a>
+              .
+            </p>
           </section>
 
           <section>
