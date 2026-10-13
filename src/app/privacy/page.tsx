@@ -52,6 +52,30 @@ export default function PrivacyPage() {
               from your IP address. This is used in aggregate to understand traffic and improve
               the site, not to identify you individually.
             </p>
+            <p className="mt-3 leading-relaxed">
+              We use Google Analytics to understand how visitors use {siteConfig.name}, such as
+              which pages and tools are most popular. Google Analytics uses cookies and similar
+              technologies to collect usage data. You can learn more about how Google handles this
+              data at{" "}
+              <a
+                href="https://policies.google.com/technologies/partner-sites"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline-offset-4 hover:underline"
+              >
+                policies.google.com/technologies/partner-sites
+              </a>
+              , and you can opt out with the{" "}
+              <a
+                href="https://tools.google.com/dlpage/gaoptout"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline-offset-4 hover:underline"
+              >
+                Google Analytics opt-out browser add-on
+              </a>
+              .
+            </p>
           </section>
 
           <section>

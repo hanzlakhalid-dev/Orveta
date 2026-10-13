@@ -6,6 +6,7 @@ export const siteConfig = {
   url: "https://orveta.online",
   ogImage: "/og-image.png",
   email: "contact@orveta.online",
+  gaId: "G-LE09XTZF50",
   keywords: [
     "free online tools",
     "business tools",
