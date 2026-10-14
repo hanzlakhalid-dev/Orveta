@@ -3,12 +3,13 @@ import type { Metadata } from "next";
 import { BlogPostCard } from "@/components/blog/blog-post-card";
 import { blogPosts } from "@/lib/blog-registry";
 import { siteConfig } from "@/lib/site-config";
+import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Blog",
   description: `Guides on pricing, SaaS metrics, startup finance, and more from the ${siteConfig.name} team.`,
-  alternates: { canonical: "/blog" },
-};
+  path: "/blog",
+});
 
 export default function BlogIndexPage() {
   const sorted = [...blogPosts].sort(

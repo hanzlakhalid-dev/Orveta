@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { siteConfig } from "@/lib/site-config";
+import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Privacy Policy",
   description: `How ${siteConfig.name} handles data, cookies, and advertising.`,
-  alternates: { canonical: "/privacy" },
-};
+  path: "/privacy",
+});
 
 const lastUpdated = "August 2026";
 

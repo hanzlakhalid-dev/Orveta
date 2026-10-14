@@ -3,12 +3,13 @@ import { Suspense } from "react";
 
 import { ToolsListing } from "@/components/tools/tools-listing";
 import { siteConfig } from "@/lib/site-config";
+import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "All Tools",
   description: `Browse every free tool on ${siteConfig.name} — business, productivity, developer, AI, finance, and utility tools in one place.`,
-  alternates: { canonical: "/tools" },
-};
+  path: "/tools",
+});
 
 export default function ToolsPage() {
   return (

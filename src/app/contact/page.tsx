@@ -3,12 +3,13 @@ import { Mail } from "lucide-react";
 
 import { ContactActions } from "@/components/contact/contact-actions";
 import { siteConfig } from "@/lib/site-config";
+import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Contact",
   description: `Get in touch with the ${siteConfig.name} team.`,
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

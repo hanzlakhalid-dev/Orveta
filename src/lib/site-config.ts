@@ -3,7 +3,7 @@ export const siteConfig = {
   tagline: "Free tools for work, done well",
   description:
     "Orveta is a free toolkit of fast, beautiful business, productivity, developer, AI, finance, and utility tools — no sign-up, no clutter, just tools that work.",
-  url: "https://orveta.online",
+  url: "https://www.orveta.online",
   ogImage: "/og-image.png",
   email: "contact@orveta.online",
   clarityId: "ywue3oajgv",
