@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { blogSeoTitles, toolSeoCopy } from "@/lib/seo-copy";
 import { siteConfig } from "@/lib/site-config";
 import type { BlogPost } from "@/types/blog";
 import type { Tool } from "@/types/tool";
@@ -79,11 +80,12 @@ export function buildPageMetadata({
   };
 }
 
-/** Metadata for /tools/[slug]. */
+/** Metadata for /tools/[slug]. Uses the shorter search wording in seo-copy.ts when present. */
 export function toolMetadata(tool: Tool): Metadata {
+  const seo = toolSeoCopy[tool.slug];
   return buildPageMetadata({
-    title: tool.name,
-    description: tool.description,
+    title: seo?.title ?? tool.name,
+    description: seo?.description ?? tool.description,
     path: `/tools/${tool.slug}`,
   });
 }
@@ -96,7 +98,7 @@ export function toolMetadata(tool: Tool): Metadata {
  */
 export function blogPostMetadata(post: BlogPost): Metadata {
   return buildPageMetadata({
-    title: post.title,
+    title: blogSeoTitles[post.slug] ?? post.title,
     description: post.excerpt,
     path: `/blog/${post.slug}`,
     type: "article",

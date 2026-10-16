@@ -7,7 +7,7 @@ import { buildPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Contact",
-  description: `Get in touch with the ${siteConfig.name} team.`,
+  description: `Questions, feedback or a tool suggestion? Email the ${siteConfig.name} team.`,
   path: "/contact",
 });
 

@@ -6,7 +6,7 @@ import { siteConfig } from "@/lib/site-config";
 import { buildPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Blog",
+  title: "Blog: Pricing, SaaS Metrics & Finance Guides",
   description: `Guides on pricing, SaaS metrics, startup finance, and more from the ${siteConfig.name} team.`,
   path: "/blog",
 });

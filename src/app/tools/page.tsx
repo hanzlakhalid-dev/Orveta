@@ -6,8 +6,8 @@ import { siteConfig } from "@/lib/site-config";
 import { buildPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "All Tools",
-  description: `Browse every free tool on ${siteConfig.name} — business, productivity, developer, AI, finance, and utility tools in one place.`,
+  title: "All Free Online Tools",
+  description: `Browse every free tool on ${siteConfig.name} across business, developer, finance, marketing, security and utility — no sign-up needed.`,
   path: "/tools",
 });
 

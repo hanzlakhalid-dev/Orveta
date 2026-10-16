@@ -6,7 +6,7 @@ import { buildPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Privacy Policy",
-  description: `How ${siteConfig.name} handles data, cookies, and advertising.`,
+  description: `How ${siteConfig.name} handles your data, cookies and analytics.`,
   path: "/privacy",
 });
 
