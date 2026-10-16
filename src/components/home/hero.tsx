@@ -1,7 +1,8 @@
 import { Sparkles } from "lucide-react";
 
 import { ToolExplorer } from "@/components/home/tool-explorer";
-import { tools } from "@/lib/tools-registry";
+import { activeCategories, tools } from "@/lib/tools-registry";
+import { categoryLabels } from "@/types/tool";
 
 export function Hero() {
   return (
@@ -20,9 +21,12 @@ export function Hero() {
           </h1>
 
           <p className="mx-auto mt-5 max-w-xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Orveta is a free, growing library of business, productivity, developer, AI, finance,
-            and utility tools &mdash; no sign-up, no paywall, no clutter. Just the thing you need,
-            built to load fast and get out of your way.
+            Orveta is a free library of{" "}
+            {new Intl.ListFormat("en", { style: "long", type: "conjunction" }).format(
+              activeCategories.map((category) => categoryLabels[category].toLowerCase())
+            )}{" "}
+            tools &mdash; no sign-up, no paywall, no clutter. Just the thing you need, built to load
+            fast and get out of your way.
           </p>
         </div>
 
