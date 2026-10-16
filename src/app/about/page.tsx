@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { tools } from "@/lib/tools-registry";
+import { activeCategories, tools } from "@/lib/tools-registry";
+import { categoryLabels } from "@/types/tool";
 import { siteConfig } from "@/lib/site-config";
 import { buildPageMetadata } from "@/lib/metadata";
 
@@ -62,10 +63,12 @@ export default function AboutPage() {
           <section>
             <h2 className="font-display text-xl font-semibold text-foreground">Where we're headed</h2>
             <p className="mt-3 leading-relaxed">
-              Orveta currently has {tools.length} tools live across business, productivity,
-              developer, AI, finance, marketing, and utility categories, with new ones shipping
-              regularly. If there's a tool you keep wishing existed, that's exactly the kind of
-              thing we want to hear about.
+              Orveta currently has {tools.length} tools live across{" "}
+              {new Intl.ListFormat("en", { style: "long", type: "conjunction" }).format(
+                activeCategories.map((category) => categoryLabels[category].toLowerCase())
+              )}{" "}
+              categories, and new tools are added over time. If there's a tool you keep wishing
+              existed, that's exactly the kind of thing we want to hear about.
             </p>
           </section>
         </div>

@@ -91,7 +91,7 @@ export function ToolExplorer() {
               No tools match that search yet.
             </p>
             <p className="mt-1.5 text-sm text-muted-foreground">
-              New tools ship every week — try a different keyword or check back soon.
+              Try a different keyword or clear the category filter.
             </p>
           </div>
         ) : (

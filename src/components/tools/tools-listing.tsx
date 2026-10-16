@@ -87,7 +87,7 @@ export function ToolsListing() {
             No tools match that search yet.
           </p>
           <p className="mt-1.5 text-sm text-muted-foreground">
-            We ship new tools every week &mdash; try a broader keyword or a different category.
+            Try a broader keyword or a different category.
           </p>
         </div>
       ) : (

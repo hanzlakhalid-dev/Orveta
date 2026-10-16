@@ -38,7 +38,7 @@ export function CategoriesGrid() {
               Browse by category
             </h2>
             <p className="mt-2 text-muted-foreground">
-              Eight categories today, all growing toward 100+ tools.
+              {tools.length} free tools across {categories.length} categories.
             </p>
           </div>
           <Link

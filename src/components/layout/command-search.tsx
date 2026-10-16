@@ -6,7 +6,7 @@ import { Search, ArrowRight, CornerDownLeft } from "lucide-react";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { searchTools } from "@/lib/tools-registry";
+import { searchTools, tools } from "@/lib/tools-registry";
 import { categoryLabels } from "@/types/tool";
 import { cn } from "@/lib/utils";
 
@@ -85,7 +85,7 @@ export function CommandSearch() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={onKeyDown}
-              placeholder="Search 100+ tools&hellip; try 'invoice' or 'rate'"
+              placeholder={`Search ${tools.length} tools… try 'invoice' or 'rate'`}
               className="flex h-14 w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
             />
             <kbd className="hidden shrink-0 rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground sm:block">
@@ -95,7 +95,7 @@ export function CommandSearch() {
           <div className="max-h-80 overflow-y-auto p-2">
             {results.length === 0 ? (
               <p className="px-3 py-8 text-center text-sm text-muted-foreground">
-                No tools match &ldquo;{query}&rdquo; yet. More tools ship every week.
+                No tools match &ldquo;{query}&rdquo;. Try a different keyword.
               </p>
             ) : (
               <ul>
