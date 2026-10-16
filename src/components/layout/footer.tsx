@@ -1,12 +1,12 @@
 import Link from "next/link";
 
 import { Logo } from "@/components/layout/logo";
-import { tools } from "@/lib/tools-registry";
+import { activeCategories, tools } from "@/lib/tools-registry";
 import { categoryLabels } from "@/types/tool";
 import { siteConfig } from "@/lib/site-config";
 
 export function Footer() {
-  const categories = Object.entries(categoryLabels);
+  const categories = activeCategories.map((key) => [key, categoryLabels[key]] as const);
 
   return (
     <footer className="border-t border-border bg-secondary/40">

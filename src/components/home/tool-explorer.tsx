@@ -5,10 +5,10 @@ import { ChevronRight, TerminalSquare } from "lucide-react";
 
 import { ToolCard } from "@/components/tools/tool-card";
 import { cn } from "@/lib/utils";
-import { tools, searchTools } from "@/lib/tools-registry";
+import { tools, searchTools, activeCategories } from "@/lib/tools-registry";
 import { categoryDot, categoryLabels, type ToolCategory } from "@/types/tool";
 
-const categories = Object.keys(categoryLabels) as ToolCategory[];
+const categories = activeCategories;
 
 export function ToolExplorer() {
   const [query, setQuery] = React.useState("");

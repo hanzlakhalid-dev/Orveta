@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Briefcase, Gauge, Code2, Bot, Landmark, Wrench, Megaphone, ShieldCheck, ArrowRight } from "lucide-react";
 
-import { tools } from "@/lib/tools-registry";
+import { activeCategories, tools } from "@/lib/tools-registry";
 import { categoryLabels, type ToolCategory } from "@/types/tool";
 
 const categoryIcons: Record<ToolCategory, typeof Briefcase> = {
@@ -27,7 +27,7 @@ const categoryCopy: Record<ToolCategory, string> = {
 };
 
 export function CategoriesGrid() {
-  const categories = Object.keys(categoryLabels) as ToolCategory[];
+  const categories = activeCategories;
 
   return (
     <section className="border-b border-border">

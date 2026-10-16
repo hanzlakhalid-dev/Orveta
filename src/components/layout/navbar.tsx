@@ -16,7 +16,7 @@ import {
   SheetTrigger,
   SheetClose,
 } from "@/components/ui/sheet";
-import { tools } from "@/lib/tools-registry";
+import { activeCategories, tools } from "@/lib/tools-registry";
 import { categoryDot, categoryLabels } from "@/types/tool";
 
 const navLinks = [
@@ -83,14 +83,14 @@ export function Navbar() {
                   Categories
                 </p>
                 <div className="mt-2 flex flex-col gap-1">
-                  {Object.entries(categoryLabels).map(([key, label]) => (
+                  {activeCategories.map((key) => (
                     <SheetClose asChild key={key}>
                       <Link
                         href={`/tools?category=${key}`}
                         className="flex items-center gap-2 rounded-md px-2 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
                       >
-                        <span className={`h-1.5 w-1.5 rounded-full ${categoryDot[key as keyof typeof categoryDot]}`} />
-                        {label}
+                        <span className={`h-1.5 w-1.5 rounded-full ${categoryDot[key]}`} />
+                        {categoryLabels[key]}
                       </Link>
                     </SheetClose>
                   ))}

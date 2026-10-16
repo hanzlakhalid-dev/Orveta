@@ -1,6 +1,6 @@
 import { CalendarClock, FileText, Calculator, Timer, Search, ShoppingCart, BarChart3, Link2, KeyRound, ScrollText, Lock, Braces, Contrast, LayoutGrid, FileImage, Building2, TrendingUp, PieChart, Car, Scale, Snowflake, Home, FileSignature, ShieldCheck, Database, ShieldHalf, Users, ServerCrash, Fingerprint, Tag, Video, Gauge, Handshake, Map, MailCheck, Scissors, Terminal, DatabaseZap, RefreshCw, Ratio, GitBranch, Container, Regex, Diff, Podcast, FileSpreadsheet, Radio, CaseSensitive, FileDigit, ListTree } from "lucide-react";
 
-import type { Tool } from "@/types/tool";
+import { categoryLabels, type Tool, type ToolCategory } from "@/types/tool";
 
 /**
  * Single source of truth for every tool on Orveta.
@@ -2195,6 +2195,15 @@ export const tools: Tool[] = [
     ],
   },
 ];
+
+/**
+ * Categories that currently contain at least one tool, in display order.
+ * Empty categories (e.g. "ai", "productivity" today) are hidden from every list,
+ * count and navigation menu; they appear automatically once a tool is added to them.
+ */
+export const activeCategories: ToolCategory[] = (Object.keys(categoryLabels) as ToolCategory[]).filter(
+  (category) => tools.some((tool) => tool.category === category)
+);
 
 export function getToolBySlug(slug: string): Tool | undefined {
   return tools.find((tool) => tool.slug === slug);
