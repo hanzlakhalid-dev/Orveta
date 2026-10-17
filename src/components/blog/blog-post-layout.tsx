@@ -7,6 +7,7 @@ import { BlogPostCard } from "@/components/blog/blog-post-card";
 import { getRelatedPosts } from "@/lib/blog-registry";
 import { tools } from "@/lib/tools-registry";
 import { siteConfig } from "@/lib/site-config";
+import { organizationJsonLd, serializeJsonLd } from "@/lib/structured-data";
 import type { BlogPost } from "@/types/blog";
 
 function formatDate(iso: string): string {
@@ -27,15 +28,16 @@ export function BlogPostLayout({ post, children }: { post: BlogPost; children: R
     headline: post.title,
     description: post.excerpt,
     datePublished: post.publishedDate,
-    author: { "@type": "Organization", name: siteConfig.name },
-    publisher: { "@type": "Organization", name: siteConfig.name },
-    mainEntityOfPage: `${siteConfig.url}/blog/${post.slug}`,
+    url: `${siteConfig.url}/blog/${post.slug}`,
+    author: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
+    publisher: organizationJsonLd,
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${siteConfig.url}/blog/${post.slug}` },
   };
 
   return (
     <div>
       {/* eslint-disable-next-line react/no-danger */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }} />
 
       <div className="border-b border-border bg-secondary/30">
         <div className="container py-10">

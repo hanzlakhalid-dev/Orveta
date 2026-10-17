@@ -11,6 +11,7 @@ import {
 import { ToolCard } from "@/components/tools/tool-card";
 import { categoryLabels } from "@/types/tool";
 import { getRelatedTools } from "@/lib/tools-registry";
+import { appCategoryByToolCategory, serializeJsonLd } from "@/lib/structured-data";
 import { siteConfig } from "@/lib/site-config";
 import type { Tool } from "@/types/tool";
 
@@ -24,7 +25,7 @@ export function ToolPageLayout({ tool, children }: { tool: Tool; children: React
       {
         "@type": "SoftwareApplication",
         name: tool.name,
-        applicationCategory: "BusinessApplication",
+        applicationCategory: appCategoryByToolCategory[tool.category],
         operatingSystem: "Any (runs in browser)",
         description: tool.description,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -59,7 +60,7 @@ export function ToolPageLayout({ tool, children }: { tool: Tool; children: React
       {/* eslint-disable-next-line react/no-danger */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
 
       {/* Header */}
