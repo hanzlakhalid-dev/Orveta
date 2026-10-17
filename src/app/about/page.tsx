@@ -9,7 +9,7 @@ import { buildPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "About",
-  description: `Why ${siteConfig.name} exists, how the tools work, and what "free, always" actually means.`,
+  description: `Why ${siteConfig.name} exists, how the tools work, what free means here, and how to reach us.`,
   path: "/about",
 });
 
@@ -40,23 +40,44 @@ export default function AboutPage() {
           <section>
             <h2 className="font-display text-xl font-semibold text-foreground">How the tools work</h2>
             <p className="mt-3 leading-relaxed">
-              Every tool on Orveta runs entirely in your browser. When you fill in a form —
+              The tools on Orveta are built to run in your browser. When you fill in a form —
               whether that's drafting an out-of-office message, building an invoice, or timing a
-              meeting's cost — the calculation happens on your device, not on a server somewhere.
-              We don't see what you type, and we don't store it once you close the tab.
+              meeting's cost — the calculation happens on your device, and the tool itself doesn't
+              send what you type to our servers. One tool, the UTM Builder, saves your campaign
+              list in your browser's local storage so it's there next time, and that stays on your
+              device too. Like most websites, {siteConfig.name} uses analytics to see how pages are
+              used; the{" "}
+              <Link href="/privacy" className="text-primary underline-offset-4 hover:underline">
+                Privacy Policy
+              </Link>{" "}
+              explains what is collected.
             </p>
           </section>
 
           <section>
-            <h2 className="font-display text-xl font-semibold text-foreground">What "free, always" means</h2>
+            <h2 className="font-display text-xl font-semibold text-foreground">Is Orveta really free?</h2>
             <p className="mt-3 leading-relaxed">
-              Every tool on this site is free to use, with no usage limits and no "upgrade to
-              unlock" walls. The site is supported by advertising rather than subscriptions —
-              you can read exactly how that works on our{" "}
+              Yes. Every tool is free to use, with no sign-up, no usage limits and no "upgrade to
+              unlock" walls. Running a website costs money, so we may show advertising in the
+              future. If that happens, the{" "}
               <Link href="/privacy" className="text-primary underline-offset-4 hover:underline">
                 Privacy Policy
               </Link>{" "}
-              page.
+              will explain how it works.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-xl font-semibold text-foreground">A note on accuracy</h2>
+            <p className="mt-3 leading-relaxed">
+              Calculators and generators give estimates and starting points, based on the numbers
+              you enter and the assumptions explained on each tool's page. They aren't financial,
+              tax or legal advice, so check anything important with a qualified professional. If
+              you spot a mistake, please{" "}
+              <Link href="/contact" className="text-primary underline-offset-4 hover:underline">
+                tell us
+              </Link>
+              .
             </p>
           </section>
 
@@ -69,6 +90,18 @@ export default function AboutPage() {
               )}{" "}
               categories, and new tools are added over time. If there's a tool you keep wishing
               existed, that's exactly the kind of thing we want to hear about.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-xl font-semibold text-foreground">Questions or feedback?</h2>
+            <p className="mt-3 leading-relaxed">
+              Email us at{" "}
+              <span className="font-medium text-foreground">{siteConfig.email}</span>, or use the{" "}
+              <Link href="/contact" className="text-primary underline-offset-4 hover:underline">
+                contact page
+              </Link>
+              . Corrections, bug reports and tool ideas are all welcome.
             </p>
           </section>
         </div>

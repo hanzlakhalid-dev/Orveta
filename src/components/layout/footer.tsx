@@ -91,7 +91,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 sm:flex-row">
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} Orveta. All tools are free, always.
+            &copy; {new Date().getFullYear()} Orveta. All tools are free to use.
           </p>
           <p className="text-xs text-muted-foreground">
             Built for people who just need the thing to work.

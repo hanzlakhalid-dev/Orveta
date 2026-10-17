@@ -12,7 +12,7 @@ export function Hero() {
         <div className="mx-auto max-w-2xl text-center">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground shadow-sm">
             <Sparkles className="h-3 w-3 text-spark" />
-            Free, forever &mdash; {tools.length} tools live
+            Free to use &mdash; {tools.length} tools live
           </span>
 
           <h1 className="mt-6 text-balance font-display text-4xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
