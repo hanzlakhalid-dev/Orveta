@@ -52,8 +52,8 @@ export default function ContactPage() {
               Passwords, bank or card details, or other sensitive personal information. We also
               can&apos;t give financial, tax or legal advice. The tools give estimates and starting
               points (see the{" "}
-              <Link href="/about" className="text-primary underline-offset-4 hover:underline">
-                About page
+              <Link href="/disclaimer" className="text-primary underline-offset-4 hover:underline">
+                Disclaimer
               </Link>
               ).
             </p>

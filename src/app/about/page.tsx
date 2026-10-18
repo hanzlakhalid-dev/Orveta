@@ -72,8 +72,12 @@ export default function AboutPage() {
             <p className="mt-3 leading-relaxed">
               Calculators and generators give estimates and starting points, based on the numbers
               you enter and the assumptions explained on each tool's page. They aren't financial,
-              tax or legal advice, so check anything important with a qualified professional. If
-              you spot a mistake, please{" "}
+              tax or legal advice, so check anything important with a qualified professional (see
+              the{" "}
+              <Link href="/disclaimer" className="text-primary underline-offset-4 hover:underline">
+                Disclaimer
+              </Link>
+              ). If you spot a mistake, please{" "}
               <Link href="/contact" className="text-primary underline-offset-4 hover:underline">
                 tell us
               </Link>

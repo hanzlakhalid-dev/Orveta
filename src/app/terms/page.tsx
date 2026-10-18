@@ -50,7 +50,11 @@ export default function TermsPage() {
               assumptions described on each tool&apos;s page. They are not financial, tax, legal,
               medical or other professional advice, and they don&apos;t replace a qualified
               professional. You are responsible for checking results and for any decision you make
-              using them.
+              using them. See the{" "}
+              <Link href="/disclaimer" className={linkClass}>
+                Disclaimer
+              </Link>{" "}
+              for details.
             </p>
           </section>
 

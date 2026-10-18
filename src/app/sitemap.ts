@@ -23,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteConfig.url}/contact` },
     { url: `${siteConfig.url}/privacy` },
     { url: `${siteConfig.url}/terms` },
+    { url: `${siteConfig.url}/disclaimer` },
   ];
 
   const toolRoutes: MetadataRoute.Sitemap = tools.map((tool) => ({

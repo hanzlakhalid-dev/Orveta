@@ -9,6 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ToolCard } from "@/components/tools/tool-card";
+import { ToolDisclaimer } from "@/components/tools/tool-disclaimer";
 import { categoryLabels } from "@/types/tool";
 import { getRelatedTools } from "@/lib/tools-registry";
 import { appCategoryByToolCategory, serializeJsonLd } from "@/lib/structured-data";
@@ -99,7 +100,10 @@ export function ToolPageLayout({ tool, children }: { tool: Tool; children: React
       </div>
 
       {/* Tool body */}
-      <div className="container py-10">{children}</div>
+      <div className="container py-10">
+        {children}
+        <ToolDisclaimer slug={tool.slug} />
+      </div>
 
       {/* Description */}
       <div className="border-t border-border bg-secondary/20">
