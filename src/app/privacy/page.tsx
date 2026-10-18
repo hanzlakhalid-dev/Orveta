@@ -10,7 +10,7 @@ export const metadata: Metadata = buildPageMetadata({
   path: "/privacy",
 });
 
-const lastUpdated = "August 2026";
+const lastUpdated = "October 2026";
 
 export default function PrivacyPage() {
   return (
@@ -74,52 +74,19 @@ export default function PrivacyPage() {
             <h2 className="font-display text-xl font-semibold text-foreground">Cookies and local storage</h2>
             <p className="mt-3 leading-relaxed">
               We use your browser's local storage to remember simple preferences, such as whether
-              you prefer light or dark mode. This stays on your device and isn't sent to us.
-              Third-party services we use, including advertising partners, may also set their own
-              cookies as described below.
-            </p>
+              you prefer light or dark mode, and, in the UTM Builder, the campaign links you save.
+              This stays on your device and isn't sent to us. Third-party services we use, such as
+              the analytics described above, may also set their own cookies.
+              </p>
           </section>
 
           <section>
             <h2 className="font-display text-xl font-semibold text-foreground">Advertising</h2>
             <p className="mt-3 leading-relaxed">
-              {siteConfig.name} is supported by advertising, including Google AdSense. Google and
-              its partners may use cookies to serve ads based on your prior visits to this site or
-              other websites, and to measure ad performance. Google's use of advertising cookies
-              enables it and its partners to serve ads based on your visit to this site and/or
-              other sites on the Internet.
-            </p>
-            <p className="mt-3 leading-relaxed">
-              You can opt out of personalized advertising by visiting{" "}
-              <a
-                href="https://adssettings.google.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary underline-offset-4 hover:underline"
-              >
-                Google Ads Settings
-              </a>
-              , or opt out of a participating vendor's use of cookies for personalized advertising
-              at{" "}
-              <a
-                href="https://www.aboutads.info/choices"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary underline-offset-4 hover:underline"
-              >
-                aboutads.info
-              </a>
-              . You can read more about how Google uses information from sites that use its
-              services at{" "}
-              <a
-                href="https://policies.google.com/technologies/partner-sites"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary underline-offset-4 hover:underline"
-              >
-                policies.google.com/technologies/partner-sites
-              </a>
-              .
+              {siteConfig.name} doesn&apos;t currently show advertising. We may add it in the future
+              to help cover the cost of running the site. If we do, this policy will be updated to
+              explain which advertising services are used, what cookies they set, and how you can
+              opt out.
             </p>
           </section>
 
