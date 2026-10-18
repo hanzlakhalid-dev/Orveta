@@ -12,6 +12,31 @@ import { Button } from "@/components/ui/button";
  */
 export function ContactActions({ email }: { email: string }) {
   const [copied, setCopied] = React.useState(false);
+  const [mailHint, setMailHint] = React.useState(false);
+  const hintTimer = React.useRef<number | undefined>(undefined);
+
+  React.useEffect(() => () => window.clearTimeout(hintTimer.current), []);
+
+  /**
+   * If a mail app opens, the browser window loses focus almost immediately.
+   * If nothing happens within 1.5s, the device probably has no mail app set up,
+   * so we point the visitor to the other two options.
+   */
+  function handleMailClick() {
+    setMailHint(false);
+    window.clearTimeout(hintTimer.current);
+    const cancel = () => {
+      window.clearTimeout(hintTimer.current);
+      window.removeEventListener("blur", cancel);
+      document.removeEventListener("visibilitychange", cancel);
+    };
+    window.addEventListener("blur", cancel, { once: true });
+    document.addEventListener("visibilitychange", cancel, { once: true });
+    hintTimer.current = window.setTimeout(() => {
+      cancel();
+      setMailHint(true);
+    }, 1500);
+  }
 
   const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`;
 
@@ -37,7 +62,7 @@ export function ContactActions({ email }: { email: string }) {
 
       <div className="flex flex-wrap justify-center gap-3">
         <Button asChild size="lg">
-          <a href={`mailto:${email}`}>
+          <a href={`mailto:${email}`} onClick={handleMailClick}>
             <Mail /> Open email app
           </a>
         </Button>
@@ -50,6 +75,13 @@ export function ContactActions({ email }: { email: string }) {
           {copied ? <Check /> : <Copy />} {copied ? "Copied" : "Copy address"}
         </Button>
       </div>
+
+      {mailHint && (
+        <p role="status" className="text-sm text-muted-foreground">
+          Nothing opened? This device may not have an email app set up. Use &ldquo;Write in
+          Gmail&rdquo; or copy the address instead.
+        </p>
+      )}
     </div>
   );
 }
