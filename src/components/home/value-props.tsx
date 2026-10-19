@@ -9,9 +9,9 @@ const props = [
   },
   {
     icon: Lock,
-    title: "Nothing leaves your browser",
+    title: "Built to run in your browser",
     description:
-      "Your invoices, numbers, and messages are processed on your device. Orveta doesn't store what you type or ask you to create an account.",
+      "Your invoices, numbers, and messages are processed on your device, and the tools don't send what you type to our servers. No account needed.",
   },
   {
     icon: InfinityIcon,

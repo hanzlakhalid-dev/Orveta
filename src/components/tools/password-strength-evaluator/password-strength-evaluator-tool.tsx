@@ -58,7 +58,7 @@ export function PasswordStrengthEvaluatorTool() {
           <CardTitle>Check a password</CardTitle>
           <CardDescription className="flex items-center gap-1.5">
             <ShieldCheck className="h-3.5 w-3.5 text-success" />
-            Never leaves your browser — nothing is logged, sent, or stored.
+            Runs in your browser — the tool doesn't send your password anywhere. Still, avoid testing a password you actually use.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-5">

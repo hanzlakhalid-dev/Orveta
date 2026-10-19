@@ -111,12 +111,12 @@ export function computeDiff(a: string, b: string, granularity: DiffGranularity):
 }
 
 export const sampleTextA = `Orveta is a collection of free tools for everyday work.
-Every tool runs entirely in your browser, so nothing you type is ever sent to a server.
+Every tool is built to run in your browser, so the tools don't send what you type to a server.
 There's no sign-up, no usage limit, and no premium tier hiding the good stuff.
 New tools are added over time across developer, marketing, and finance categories.`;
 
 export const sampleTextB = `Orveta is a growing collection of free tools for everyday work and life.
-Every tool runs entirely in your browser, so nothing you type is ever sent to a server or stored.
+Every tool is built to run in your browser, so the tools don't send what you type to a server.
 There's no sign-up and no premium tier hiding the good stuff.
 New tools are added over time across developer, marketing, finance, and security categories.
 Feedback is always welcome if there's a tool you keep wishing existed.`;

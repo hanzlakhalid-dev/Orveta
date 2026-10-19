@@ -43,7 +43,7 @@ export function PdfMetadataExtractorTool() {
       <Card>
         <CardHeader>
           <CardTitle>Drop a PDF</CardTitle>
-          <CardDescription>Nothing is uploaded — it's read directly in your browser.</CardDescription>
+          <CardDescription>Read directly in your browser — the tool doesn't upload the file.</CardDescription>
         </CardHeader>
         <CardContent>
           <div

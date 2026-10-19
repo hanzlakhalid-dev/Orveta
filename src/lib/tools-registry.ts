@@ -52,7 +52,7 @@ export const tools: Tool[] = [
       {
         question: "Is my information stored anywhere?",
         answer:
-          "No. Everything runs in your browser — nothing you type is sent to a server or saved once you leave the page.",
+          "No. The tool runs in your browser and doesn't send what you type to a server, and it doesn't save it once you leave the page.",
       },
     ],
   },
@@ -462,7 +462,7 @@ export const tools: Tool[] = [
       {
         question: "Is my information sent anywhere when I use this tool?",
         answer:
-          "No — everything is generated directly in your browser. Nothing you type is transmitted or stored.",
+          "No — everything is generated directly in your browser. The tool doesn't transmit or store what you type.",
       },
     ],
   },
@@ -471,7 +471,7 @@ export const tools: Tool[] = [
     name: "Secure Password Strength Evaluator & Visual Meter",
     tagline: "See exactly how strong a password really is, instantly.",
     description:
-      "Type or paste a password and get a real entropy-based strength score with a color-coded meter, a checklist of what's missing, and specific feedback — plus a one-click strong password generator. Everything runs locally in your browser; nothing is ever transmitted or stored.",
+      "Type or paste a password and get a real entropy-based strength score with a color-coded meter, a checklist of what's missing, and specific feedback — plus a one-click strong password generator. Everything runs locally in your browser, and the tool doesn't transmit or store your password.",
     category: "security",
     icon: Lock,
     keywords: [
@@ -492,7 +492,7 @@ export const tools: Tool[] = [
       {
         question: "Does this send my password anywhere?",
         answer:
-          "No. The entire evaluation runs in your browser using local JavaScript — your password is never transmitted over the network, logged, or stored anywhere, including by us.",
+          "No. The evaluation runs in your browser using local JavaScript, and the tool doesn't send your password anywhere or store it. As a precaution, though, don't test a password you currently use anywhere.",
       },
       {
         question: "What does \"bits of entropy\" mean?",
@@ -537,7 +537,7 @@ export const tools: Tool[] = [
       {
         question: "Does this send my JSON anywhere?",
         answer:
-          "No — parsing, formatting, and validation all happen locally in your browser using standard JavaScript. Nothing you paste is transmitted or stored.",
+          "No — parsing, formatting, and validation all happen locally in your browser using standard JavaScript. The tool doesn't transmit or store what you paste.",
       },
       {
         question: "How accurate is the error location?",
@@ -672,7 +672,7 @@ export const tools: Tool[] = [
       {
         question: "Does my SVG get uploaded anywhere?",
         answer:
-          "No — the file is read directly in your browser using the File API, and all encoding happens locally. Nothing is sent to a server.",
+          "No — the file is read directly in your browser using the File API, and all encoding happens locally. The tool doesn't send it to a server.",
       },
       {
         question: "Why offer both Base64 and URL-encoded formats?",
@@ -1082,7 +1082,7 @@ export const tools: Tool[] = [
       {
         question: "Is my token sent anywhere?",
         answer:
-          "No — decoding happens entirely in your browser using standard JavaScript. Nothing you paste is transmitted or logged, which matters given that tokens often contain sensitive session data.",
+          "No — decoding happens in your browser using standard JavaScript, and the tool doesn't transmit or log what you paste. Tokens often contain sensitive session data, though, so use test or expired tokens where you can and don't paste a live production token.",
       },
       {
         question: "Why didn't my SAML assertion decode?",
@@ -1408,7 +1408,7 @@ export const tools: Tool[] = [
       {
         question: "Does my uploaded image get sent anywhere?",
         answer:
-          "No — it's read directly in your browser and never uploaded to a server.",
+          "No — it's read directly in your browser, and the tool doesn't upload it to a server.",
       },
     ],
   },
@@ -1625,7 +1625,7 @@ export const tools: Tool[] = [
       {
         question: "Does this send my URL anywhere?",
         answer:
-          "No — everything runs locally in your browser. The URL is never sent to a server, so it's safe to use on private or unpublished links.",
+          "No — everything runs locally in your browser, and the tool doesn't send the URL to a server. Even so, avoid pasting links that contain secrets such as tokens or passwords.",
       },
       {
         question: "How does it decide which parameters are tracking params?",
@@ -1666,7 +1666,7 @@ export const tools: Tool[] = [
       {
         question: "Does this send my request anywhere?",
         answer:
-          "No — the command is only parsed and converted locally in your browser. Nothing is sent over the network, so it's safe to paste commands containing real API keys or tokens.",
+          "No — the command is only parsed and converted locally in your browser, and the tool doesn't send it anywhere. Even so, replace real API keys or tokens with placeholders before pasting a command into any online tool.",
       },
       {
         question: "What cURL flags are supported?",
@@ -1746,7 +1746,7 @@ export const tools: Tool[] = [
       {
         question: "Is my config sent anywhere?",
         answer:
-          "No — parsing and conversion both happen locally in your browser. Nothing is uploaded, so it's safe to paste configs containing internal hostnames or credentials.",
+          "No — parsing and conversion both happen locally in your browser, and the tool doesn't upload what you paste. Even so, remove credentials from configs before pasting them into any online tool.",
       },
       {
         question: "What YAML features are supported?",
@@ -1914,7 +1914,7 @@ export const tools: Tool[] = [
       {
         question: "Is my log data uploaded anywhere?",
         answer:
-          "No — matching and extraction both run locally in your browser using JavaScript's built-in regex engine. Nothing is sent to a server, which matters if your logs contain IPs, tokens, or other sensitive values.",
+          "No — matching and extraction both run locally in your browser using JavaScript's built-in regex engine. The tool doesn't send your logs to a server. Even so, redact tokens and other secrets before pasting logs into any online tool.",
       },
     ],
   },
@@ -1954,7 +1954,7 @@ export const tools: Tool[] = [
       {
         question: "Is my text uploaded anywhere?",
         answer:
-          "No — the comparison runs entirely in your browser. Nothing you paste is sent to a server, which matters if you're comparing contract drafts or other sensitive text.",
+          "No — the comparison runs in your browser, and the tool doesn't send what you paste to a server. Still, avoid pasting highly sensitive text, such as contract drafts, into any online tool.",
       },
     ],
   },
@@ -2027,7 +2027,7 @@ export const tools: Tool[] = [
       {
         question: "Is my data uploaded anywhere?",
         answer:
-          "No — parsing and deduplication both happen locally in your browser using JavaScript. Your file never leaves your device, which matters for customer lists or other sensitive data.",
+          "No — parsing and deduplication both happen locally in your browser using JavaScript, and the tool doesn't upload your file. Even so, be careful with customer lists or other sensitive data in any online tool.",
       },
       {
         question: "Does it handle fields with commas or quotes inside them?",
@@ -2140,7 +2140,7 @@ export const tools: Tool[] = [
       {
         question: "Is my PDF uploaded anywhere?",
         answer:
-          "No — the file is read and inspected entirely in your browser using JavaScript's File API. It's never sent to a server, which matters for confidential or unpublished documents.",
+          "No — the file is read and inspected in your browser using JavaScript's File API, and the tool doesn't send it to a server. For highly confidential documents, consider an offline tool.",
       },
       {
         question: "Why does it say the results might be incomplete for some PDFs?",
