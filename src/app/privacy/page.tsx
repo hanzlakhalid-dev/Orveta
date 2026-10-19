@@ -28,8 +28,8 @@ export default function PrivacyPage() {
           <section>
             <h2 className={h2Class}>Overview</h2>
             <p className="mt-3 leading-relaxed">
-              {siteConfig.name} (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) operates{" "}
-              {siteConfig.url}. This policy explains what information is collected when you use the
+              {siteConfig.name} (&quot;we&quot;) operates {siteConfig.url.replace("https://", "")}. This
+              policy explains what information is collected when you use the
               site, how it&apos;s used, and the choices you have. By using {siteConfig.name}, you
               agree to the practices described here.
             </p>
