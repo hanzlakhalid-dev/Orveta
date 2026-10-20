@@ -129,6 +129,37 @@ export default function PrivacyPage() {
           </section>
 
           <section>
+            <h2 className={h2Class}>How long we keep information</h2>
+            <p className="mt-3 leading-relaxed">
+              Messages you send us are kept in our email account for as long as we need them to
+              reply to you and to keep reasonable records of our correspondence. We delete them if
+              you ask. Analytics data is kept by Microsoft Clarity under its own retention
+              settings.
+            </p>
+          </section>
+
+          <section>
+            <h2 className={h2Class}>Where information is processed</h2>
+            <p className="mt-3 leading-relaxed">
+              Our service providers (Vercel, Microsoft and Zoho) may process information in other
+              countries, including the United States. They are responsible for protecting it as
+              described in their own policies.
+            </p>
+          </section>
+
+          <section>
+            <h2 className={h2Class}>Your rights and choices</h2>
+            <p className="mt-3 leading-relaxed">
+              Depending on where you live, you may have rights over your personal data, such as
+              asking to see it, correct it or delete it, objecting to how it is used, or complaining
+              to your local data protection authority. To use these rights for information we hold,
+              such as an email you sent us, write to{" "}
+              <span className="font-medium text-foreground">{siteConfig.email}</span>. You can also
+              block or delete cookies and local storage in your browser settings at any time.
+            </p>
+          </section>
+
+          <section>
             <h2 className={h2Class}>Third-party links</h2>
             <p className="mt-3 leading-relaxed">
               Some pages may link to third-party websites or services. We aren&apos;t responsible
