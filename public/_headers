@@ -1,0 +1,6 @@
+# Cloudflare Pages: keep the free *.pages.dev addresses (and preview branches) out of search results.
+# Your real domain, www.orveta.online, is not affected.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex
