@@ -9,6 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ToolCard } from "@/components/tools/tool-card";
+import { ToolContentSections } from "@/components/tools/tool-content-sections";
 import { ToolDisclaimer } from "@/components/tools/tool-disclaimer";
 import { categoryLabels } from "@/types/tool";
 import { getRelatedTools } from "@/lib/tools-registry";
@@ -127,6 +128,8 @@ export function ToolPageLayout({ tool, children }: { tool: Tool; children: React
                 </li>
               ))}
             </ol>
+
+            <ToolContentSections slug={tool.slug} />
 
             <h2 className="mt-10 font-display text-xl font-semibold text-foreground">
               Frequently asked questions

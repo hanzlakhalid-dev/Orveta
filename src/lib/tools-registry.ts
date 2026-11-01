@@ -786,7 +786,7 @@ export const tools: Tool[] = [
     name: "Startup Equity Dilution & Cap Table Simulator",
     tagline: "Stack SAFEs and priced rounds, watch founder ownership shrink.",
     description:
-      "Add a sequence of SAFEs, convertible notes, and priced equity rounds — each with its own cap, discount, or pre-money valuation — and instantly see how founder ownership dilutes round by round, including a correctly-modeled option pool shuffle.",
+      "Add a sequence of SAFEs, convertible notes, and priced equity rounds — each with its own cap, discount, or pre-money valuation — and instantly see how founder ownership dilutes round by round, including an option pool top-up that dilutes existing holders before the new investor's stake is calculated.",
     category: "finance",
     icon: PieChart,
     keywords: [
@@ -812,7 +812,7 @@ export const tools: Tool[] = [
       {
         question: "What is the \"option pool shuffle\"?",
         answer:
-          "When a priced round includes a new option pool, that pool is typically carved out of the company before the new investor's percentage is calculated — meaning existing shareholders (not the incoming investor) absorb that dilution. This tool models that correctly, which many quick calculators skip.",
+          "When a priced round includes a new option pool, that pool is typically carved out of the company before the new investor's percentage is calculated — meaning existing shareholders (not the incoming investor) absorb that dilution. This tool applies the pool before the new investor's percentage, so existing shareholders absorb that dilution.",
       },
       {
         question: "Can I model multiple founders separately?",
