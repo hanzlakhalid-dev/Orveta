@@ -38,7 +38,7 @@ export function ToolContentSections({ slug }: { slug: string }) {
             <li key={i}>{line}</li>
           ))}
         </ul>
-        <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">The tool shows</p>
+        <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Result</p>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-foreground">
           {content.example.results.map((line, i) => (
             <li key={i}>{line}</li>

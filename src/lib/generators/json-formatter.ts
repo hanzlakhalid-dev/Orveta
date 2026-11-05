@@ -51,11 +51,10 @@ export function minifyJson(value: JsonValue): string {
 
 export function countKeys(value: JsonValue): number {
   if (value === null || typeof value !== "object") return 0;
-  const entries = Array.isArray(value) ? value : Object.values(value);
-  return entries.reduce<number>((count, item) => {
-    const own = Array.isArray(value) ? 0 : 1;
-    return count + own + countKeys(item as JsonValue);
-  }, Array.isArray(value) ? 0 : Object.keys(value).length);
+  if (Array.isArray(value)) {
+    return value.reduce<number>((total, item) => total + countKeys(item), 0);
+  }
+  return Object.keys(value).length + Object.values(value).reduce<number>((total, child) => total + countKeys(child), 0);
 }
 
 export function maxDepth(value: JsonValue): number {
