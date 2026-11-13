@@ -107,7 +107,7 @@ export const tools: Tool[] = [
       {
         question: "Does it save my invoice?",
         answer:
-          "No. Nothing is stored, so download the PDF before you close or reload the page.",
+          "No. The tool doesn't save your invoice anywhere for you to come back to, so download the PDF before you close or reload the page.",
       },
     ],
   },
