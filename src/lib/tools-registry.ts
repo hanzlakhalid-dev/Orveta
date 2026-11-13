@@ -82,7 +82,7 @@ export const tools: Tool[] = [
       {
         question: "Is this an invoice generator or a receipt generator?",
         answer:
-          "Both — switch the document type between \"Invoice\" and \"Receipt\" and the labels, numbering, and totals adjust accordingly.",
+          "Both. Switch between \"Invoice\" and \"Receipt\" and the labels change to match. The number is a field you type yourself, so you choose your own numbering.",
       },
       {
         question: "Can I add my own logo?",
@@ -103,6 +103,11 @@ export const tools: Tool[] = [
         question: "Can clients pay directly from the PDF?",
         answer:
           "The PDF is a document, not a payment page. Add your payment instructions or a payment link in the notes field so clients know how to pay.",
+      },
+      {
+        question: "Does it save my invoice?",
+        answer:
+          "No. Nothing is stored, so download the PDF before you close or reload the page.",
       },
     ],
   },
@@ -125,19 +130,19 @@ export const tools: Tool[] = [
     howTo: [
       "Enter your target annual income and yearly business expenses.",
       "Set how many weeks a year you work and your billable hours per week.",
-      "Add your desired profit margin to see the recommended rate range.",
+      "Set your profit margin and the share of your time that is billable to see your hourly, day and weekly rates.",
       "Enter estimated project hours to get an instant project quote you can copy into a proposal.",
     ],
     faq: [
       {
         question: "How is the hourly rate calculated?",
         answer:
-          "It adds your target income to your annual expenses, divides that by your realistic billable hours per year, then layers on your profit margin — the same logic professional pricing guides use.",
+          "It adds your target income to your annual expenses, adds your profit margin on top, then divides by your billable hours for the year.",
       },
       {
         question: "What's a realistic billable-hours percentage?",
         answer:
-          "Most freelancers can only bill 60–80% of their working hours once you account for admin, marketing, and finding clients — the calculator defaults to a conservative estimate you can adjust.",
+          "Many freelancers find only part of their working time can be billed, because admin, marketing and finding clients take time. The tool starts at 70% as an example. Adjust it to match your own records.",
       },
       {
         question: "Can I use this for a fixed-price project quote?",
@@ -147,7 +152,12 @@ export const tools: Tool[] = [
       {
         question: "Does it account for taxes?",
         answer:
-          "Add your estimated tax rate as part of your expenses or profit margin — the calculator gives you the gross rate to charge; what you keep after tax depends on your local tax rules.",
+          "No. Taxes aren't calculated, so the rate is before tax. If your desired income is what you want to keep after tax, add an estimate of your taxes to it.",
+      },
+      {
+        question: "Is the profit margin a percentage of my revenue?",
+        answer:
+          "No. It is added on top of your income plus expenses, which makes it a markup. A 15% margin here means the rate is 15% above what you need to cover income and expenses.",
       },
     ],
   },
@@ -213,7 +223,7 @@ export const tools: Tool[] = [
       "seo snippet generator",
     ],
     howTo: [
-      "Enter your meta title and watch the character counter — green means safely under Google's typical truncation point.",
+      "Enter your meta title and watch the character counter. Green means it is within the usual length limit.",
       "Enter your meta description and check it against the same limit.",
       "Add your page URL to see the breadcrumb path Google would display.",
       "Switch between the Desktop and Mobile tabs to compare how the snippet wraps on each.",
@@ -222,7 +232,7 @@ export const tools: Tool[] = [
       {
         question: "Are these the exact pixel widths Google uses?",
         answer:
-          "They're a close, widely-used approximation based on typical Google SERP container widths and fonts. Google's actual rendering can shift slightly over time and varies by query, so treat this as a strong guide rather than a guarantee.",
+          "No. The length check counts characters (about 55 to 60 for titles and 150 to 160 for descriptions), and the preview wraps text at a typical result width. Google measures width in pixels, so wide letters use more room than narrow ones. Treat this as a guide, not a guarantee.",
       },
       {
         question: "What counts as too long for a title or description?",
@@ -238,6 +248,11 @@ export const tools: Tool[] = [
         question: "Do I need to enter a real URL?",
         answer:
           "No — any URL works to preview the breadcrumb path. Just make sure it reflects your real site structure if you want an accurate picture before publishing.",
+      },
+      {
+        question: "Why does Google show a different title than the one I wrote?",
+        answer:
+          "Google often rewrites titles and descriptions to suit the search, for example when a title is too long, vague or stuffed with keywords. This tool shows what you provide, not what Google will choose.",
       },
     ],
   },
@@ -509,6 +524,11 @@ export const tools: Tool[] = [
         answer:
           "It uses your browser's built-in secure random number generator (the Web Crypto API), not a predictable pseudo-random function — the same category of randomness used in real cryptographic applications.",
       },
+      {
+        question: "Is a high score enough?",
+        answer:
+          "No. The score reflects length, variety of characters and a few known weaknesses. It can't tell whether a password has been leaked or reused. Use a different password for every site, ideally from a password manager.",
+      },
     ],
   },
   {
@@ -529,7 +549,7 @@ export const tools: Tool[] = [
     ],
     howTo: [
       "Paste your JSON into the input box — minified, pretty-printed, or broken all work.",
-      "If it's invalid, read the exact line and column of the syntax error.",
+      "If it's invalid, read the error message and, where your browser reports it, the line and column of the problem.",
       "If it's valid, explore the interactive tree — click any row to expand or collapse it.",
       "Copy the formatted or minified version with one click.",
     ],
@@ -542,17 +562,22 @@ export const tools: Tool[] = [
       {
         question: "How accurate is the error location?",
         answer:
-          "It's derived directly from the JavaScript engine's own parser error, converted into a line and column number — the same information the engine itself uses internally, not a separate guess.",
+          "It comes from the JavaScript engine's own parser error, converted into a line and column number. Chrome and Edge include the position. Some browsers show only the message.",
       },
       {
         question: "What counts as \"minified\" vs \"formatted\"?",
         answer:
-          "Minified removes all unnecessary whitespace to produce the smallest possible file size; formatted adds 2-space indentation and line breaks so it's readable. Both represent the exact same data.",
+          "Minified removes all unnecessary whitespace to make the smallest file. Formatted adds 2-space indentation and line breaks so it's readable. Both come from the same parsed data, so numbers and key order are written the same way in both.",
       },
       {
         question: "Is there a size limit?",
         answer:
           "There's no hard-coded limit, but very large JSON files (several megabytes) may render the interactive tree slowly, since every node is a live, expandable element.",
+      },
+      {
+        question: "Why did my numbers or key order change?",
+        answer:
+          "The tool parses your JSON and prints it again. Numbers are written in their shortest form (1.0 becomes 1), keys that look like numbers move to the front, a repeated key keeps only its last value, and numbers with more than about 15 digits lose precision. Keep very large IDs as strings.",
       },
     ],
   },
@@ -722,7 +747,7 @@ export const tools: Tool[] = [
       {
         question: "Why are there two separate escalation rates?",
         answer:
-          "Base rent escalation is typically a fixed percentage set in the lease. NNN charges often grow at a different rate tied to actual operating cost increases, so keeping them separate gives a more realistic year-by-year projection.",
+          "Base rent usually rises on a schedule set in the lease, often a fixed percentage or fixed dollar steps. NNN charges follow the property's actual cost increases, which can differ. Keeping them separate gives a more realistic year-by-year projection.",
       },
       {
         question: "Is this the same as what my landlord will quote me?",
@@ -733,6 +758,11 @@ export const tools: Tool[] = [
         question: "Does this account for free rent or tenant improvement allowances?",
         answer:
           "No — this calculates the stated lease economics only. Free rent periods and TI allowances would need to be factored in separately when comparing the true effective cost of a lease.",
+      },
+      {
+        question: "What if my lease has fixed dollar increases instead of percentages?",
+        answer:
+          "Enter the percentage that matches the first step, then compare the year-by-year table with the schedule in your lease. If they differ, trust the lease schedule.",
       },
     ],
   },
@@ -824,6 +854,11 @@ export const tools: Tool[] = [
         answer:
           "No — this is a directional modeling tool for understanding dilution mechanics. For your actual cap table, use dedicated software like Carta or Pulley, and involve a startup lawyer for anything you're actually signing.",
       },
+      {
+        question: "Why doesn't this match my lawyer's cap table?",
+        answer:
+          "This is a simplified model. It converts SAFEs immediately, takes any discount off the cap, and tracks founders as one line. Real cap tables also track share counts, vesting, liquidation preferences and the exact terms in each document. Use this to understand dilution, not to replace the real table.",
+      },
     ],
   },
   {
@@ -843,7 +878,7 @@ export const tools: Tool[] = [
       "1099 tax deduction calculator",
     ],
     howTo: [
-      "Add each business trip with its date, miles driven, and purpose — the correct IRS rate for that date is applied automatically.",
+      "Add each business trip with its date, miles driven, and purpose. The IRS rate for that date (2025 and 2026 are built in) is applied automatically.",
       "Add itemized business expenses by category, description, and amount.",
       "Business meals are automatically capped at 50% deductible, per IRS rules — everything else defaults to fully deductible.",
       "Review your estimated total deduction and copy the summary for your records.",
@@ -852,7 +887,7 @@ export const tools: Tool[] = [
       {
         question: "Why does the mileage rate change depending on the date?",
         answer:
-          "The IRS occasionally adjusts its standard mileage rate mid-year when fuel costs shift significantly — 2026 is one of those years, with a rate change effective July 1. This tool applies whichever rate was actually in effect for each trip's date, rather than one flat rate for the whole year.",
+          "The IRS sometimes changes its standard mileage rate mid-year when fuel costs shift, and 2026 is one of those years, with a new rate from July 1. This tool applies 70 cents for 2025, 72.5 cents for January to June 2026 and 76 cents for July to December 2026. A date outside those years uses the latest rate in the table, so check the current IRS rate for other years.",
       },
       {
         question: "Why are business meals only 50% deductible?",
@@ -942,7 +977,7 @@ export const tools: Tool[] = [
       {
         question: "Which strategy actually saves more money?",
         answer:
-          "Avalanche (highest interest rate first) almost always saves more in total interest, since it eliminates your most expensive debt fastest. The difference can be small or large depending on how much your interest rates vary across debts.",
+          "Avalanche (highest interest rate first) usually saves the same or more in total interest, since it clears your most expensive debt fastest. The difference can be small or large depending on how much your rates vary.",
       },
       {
         question: "Then why would anyone choose snowball?",
@@ -958,6 +993,11 @@ export const tools: Tool[] = [
         question: "Does this account for changing interest rates or promotional periods?",
         answer:
           "No — it assumes fixed rates for the full payoff period. If you have a variable-rate card or an intro APR that expires, treat this as a rough estimate rather than an exact timeline.",
+      },
+      {
+        question: "Why do both strategies sometimes give the same result?",
+        answer:
+          "They pay off debts in the same order when the debt with the smallest balance also has the highest rate. Then the totals match.",
       },
     ],
   },
@@ -987,7 +1027,7 @@ export const tools: Tool[] = [
       {
         question: "What's a typical agent commission rate?",
         answer:
-          "It varies by market and negotiation, but commissions in the roughly 4-6% range (often split between listing and buyer's agents) have historically been common in the US, though this has been shifting — confirm the actual rate with your agent.",
+          "It's negotiable and varies by market, so use the rate in your listing agreement. The tool starts at 5.5% only as an example. Confirm the actual rate with your agent.",
       },
       {
         question: "What are seller concessions?",
@@ -1003,6 +1043,11 @@ export const tools: Tool[] = [
         question: "Are transfer taxes the same everywhere?",
         answer:
           "No — transfer tax rates and who pays them (buyer, seller, or split) vary significantly by state and even by county or city. Confirm the actual local rate with your agent or title company.",
+      },
+      {
+        question: "Which costs does it leave out?",
+        answer:
+          "Property tax and utility prorations, HOA fees, prepayment penalties, interest accrued to closing, staging, moving and warranty costs, and income tax on any gain. Your lender's payoff statement and your closing statement have the exact figures.",
       },
     ],
   },

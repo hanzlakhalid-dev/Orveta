@@ -10,7 +10,7 @@ export const metadata: Metadata = buildPageMetadata({
   path: "/privacy",
 });
 
-const lastUpdated = "October 2026";
+const lastUpdated = "November 2026";
 
 const linkClass = "text-primary underline-offset-4 hover:underline";
 const h2Class = "font-display text-xl font-semibold text-foreground";
@@ -66,7 +66,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className={h2Class}>Automatically collected information</h2>
             <p className="mt-3 leading-relaxed">
-              Our hosting provider, Vercel, receives standard technical information when your
+              Our hosting provider, Cloudflare, receives standard technical information when your
               browser asks for a page, such as your IP address, browser type and the page
               requested, and may keep it in server logs. We use this kind of information to
               understand traffic and improve the site, not to identify individual visitors.
@@ -122,7 +122,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className={h2Class}>Services we use</h2>
             <ul className="mt-3 list-disc space-y-1 pl-5 leading-relaxed">
-              <li>Vercel: hosting and delivering the site.</li>
+              <li>Cloudflare: hosting and delivering the site.</li>
               <li>Microsoft Clarity: usage analytics, as described above.</li>
               <li>Zoho Mail: the email account that receives your messages.</li>
             </ul>
@@ -141,7 +141,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className={h2Class}>Where information is processed</h2>
             <p className="mt-3 leading-relaxed">
-              Our service providers (Vercel, Microsoft and Zoho) may process information in other
+              Our service providers (Cloudflare, Microsoft and Zoho) may process information in other
               countries, including the United States. They are responsible for protecting it as
               described in their own policies.
             </p>
