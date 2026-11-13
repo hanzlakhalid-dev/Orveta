@@ -50,7 +50,7 @@ export const toolSeoCopy: Record<string, SeoCopy> = {
     description: "Check a password's strength with an entropy-based score, a color meter, a checklist of what's missing, and a strong-password generator.",
   },
   "json-formatter": {
-    description: "Paste messy or broken JSON to validate it, find syntax errors by line and column, and explore a collapsible tree. Copy formatted or minified.",
+    description: "Paste messy or broken JSON to validate it, see the error and its position when your browser reports one, and explore a tree. Copy formatted or minified.",
   },
   "wcag-checker": {
     description: "Check text and background colors for the WCAG contrast ratio, with AA and AAA pass/fail results for your font size and weight.",

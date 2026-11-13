@@ -536,7 +536,7 @@ export const tools: Tool[] = [
     name: "JSON Tree Formatter & Syntax Validator",
     tagline: "Turn messy or broken JSON into a clean, color-coded tree.",
     description:
-      "Paste minified, messy, or broken JSON and instantly get a validity check with the exact line and column of any syntax error, plus a collapsible, color-coded interactive tree view you can explore, and one-click copy for both formatted and minified output.",
+      "Paste minified, messy, or broken JSON and instantly get a validity check with the error message and, where your browser reports it, the line and column of any syntax error, plus a collapsible, color-coded interactive tree view you can explore, and one-click copy for both formatted and minified output.",
     category: "developer",
     icon: Braces,
     keywords: [
