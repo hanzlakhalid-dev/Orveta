@@ -87,12 +87,19 @@ export function newRetentionRow(defaults: DataCategoryDefault): RetentionRow {
 export function buildRetentionScheduleText(companyName: string, rows: RetentionRow[]): string {
   const name = companyName.trim() || "[Company Name]";
   const header = `${name} — Data Retention Schedule`;
-  const colWidths = { category: 38, retention: 28, basis: 26, method: 30 };
+  const gap = 2;
+  const widthOf = (heading: string, values: string[]) => Math.max(heading.length, ...values.map((v) => v.length)) + gap;
+  const colWidths = {
+    category: widthOf("Data Category", rows.map((r) => r.label)),
+    retention: widthOf("Retention Period", rows.map((r) => r.retention)),
+    basis: widthOf("Legal Basis", rows.map((r) => r.legalBasis)),
+  };
 
-  const pad = (str: string, width: number) => (str.length >= width ? str.slice(0, width - 1) + " " : str.padEnd(width));
+  const pad = (str: string, width: number) => str.padEnd(width);
 
-  const lines: string[] = [header, "", "Data Category".padEnd(colWidths.category) + "Retention Period".padEnd(colWidths.retention) + "Legal Basis".padEnd(colWidths.basis) + "Deletion Method"];
-  lines.push("-".repeat(colWidths.category + colWidths.retention + colWidths.basis + colWidths.method));
+  const lines: string[] = [header, "", pad("Data Category", colWidths.category) + pad("Retention Period", colWidths.retention) + pad("Legal Basis", colWidths.basis) + "Deletion Method"];
+  const longestMethod = Math.max("Deletion Method".length, ...rows.map((r) => r.deletionMethod.length));
+  lines.push("-".repeat(colWidths.category + colWidths.retention + colWidths.basis + longestMethod));
 
   for (const row of rows) {
     lines.push(
