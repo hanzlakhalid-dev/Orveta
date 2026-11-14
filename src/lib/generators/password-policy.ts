@@ -79,10 +79,10 @@ export const frameworkBaselines: Record<ComplianceFramework, FrameworkBaseline> 
     requireSpecial: true,
     maxAgeDays: 90,
     historyCount: 4,
-    lockoutThreshold: 6,
+    lockoutThreshold: 10,
     mfaRequired: true,
     screenBreached: false,
-    note: "PCI DSS is the most numerically explicit of these standards, with defined minimums for length, history, and lockout attempts.",
+    note: "PCI DSS 4.0 and later set specific numbers: at least 12 characters with letters and numbers, lockout after no more than 10 failed attempts, and a 90-day password change where a password is the only factor. This baseline also asks for all four character types and a 90-day maximum age in every case, which is stricter than the standard in those places.",
   },
   gdpr: {
     key: "gdpr",

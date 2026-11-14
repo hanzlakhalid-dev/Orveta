@@ -55,7 +55,11 @@ export function CaseConverterTool() {
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="break-all rounded-lg border border-border bg-secondary/30 p-4 font-mono text-sm text-foreground">
-            {result.slug || <span className="text-muted-foreground">Type something above</span>}
+            {result.slug || (
+              <span className="text-muted-foreground">
+                {input.trim() ? "No usable letters or digits found. This tool keeps only A–Z and 0–9, so text in other alphabets is dropped." : "Type something above"}
+              </span>
+            )}
           </div>
           <CopyButton getText={() => result.slug} label="Copy slug" successMessage="Slug copied" />
         </CardContent>

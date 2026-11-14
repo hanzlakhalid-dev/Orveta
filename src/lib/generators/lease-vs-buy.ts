@@ -5,6 +5,8 @@ export interface LeaseVsBuyInput {
   monthlyLeasePayment: number;
   analysisPeriodYears: number;
   discountRatePercent: number;
+  /** Expected resale value at the end of the analysis period, after any tax. 0 = no resale value. */
+  resaleValue: number;
 }
 
 export const defaultLeaseVsBuyInput: LeaseVsBuyInput = {
@@ -14,6 +16,7 @@ export const defaultLeaseVsBuyInput: LeaseVsBuyInput = {
   monthlyLeasePayment: 2400,
   analysisPeriodYears: 5,
   discountRatePercent: 8,
+  resaleValue: 0,
 };
 
 export interface YearRow {
@@ -50,7 +53,8 @@ export function calculateLeaseVsBuy(input: LeaseVsBuyInput): LeaseVsBuyResult {
   rows.push({ year: 0, buyCashFlow: -input.equipmentCost, buyCumulative, leaseCashFlow: 0, leaseCumulative });
 
   for (let year = 1; year <= years; year++) {
-    const buyCashFlow = year <= input.usefulLifeYears ? depreciationTaxShield : 0;
+    const resale = year === years ? Math.max(input.resaleValue || 0, 0) : 0;
+    const buyCashFlow = (year <= input.usefulLifeYears ? depreciationTaxShield : 0) + resale;
     const leaseCashFlow = -afterTaxLeaseCost;
 
     buyCumulative += buyCashFlow;

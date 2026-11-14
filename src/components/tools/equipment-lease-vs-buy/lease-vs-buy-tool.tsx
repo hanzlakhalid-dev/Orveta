@@ -111,6 +111,16 @@ export function LeaseVsBuyTool() {
                 />
               </div>
             </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="lb-resale">Resale value at end of analysis (after tax, optional)</Label>
+              <Input
+                id="lb-resale"
+                type="number"
+                min={0}
+                value={input.resaleValue}
+                onChange={(e) => update("resaleValue", Number(e.target.value))}
+              />
+            </div>
             <Button variant="ghost" onClick={() => setInput(defaultLeaseVsBuyInput)} className="text-muted-foreground">
               <RotateCcw className="h-4 w-4" />
               Reset form
