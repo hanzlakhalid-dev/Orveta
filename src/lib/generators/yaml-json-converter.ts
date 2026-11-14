@@ -273,11 +273,95 @@ export interface YamlParseResult {
 }
 
 /** Parses a practical subset of YAML (block + flow mappings/sequences, common scalar types) into a JS value. */
+/** True when a [ ] / { } value is closed on the same line (quotes respected). */
+function bracketsBalanced(value: string): boolean {
+  let depth = 0;
+  let inSingle = false;
+  let inDouble = false;
+  for (let i = 0; i < value.length; i++) {
+    const ch = value[i];
+    if (inSingle) {
+      if (ch === "'") inSingle = false;
+      continue;
+    }
+    if (inDouble) {
+      if (ch === '"' && value[i - 1] !== "\\") inDouble = false;
+      continue;
+    }
+    if (ch === "'") inSingle = true;
+    else if (ch === '"') inDouble = true;
+    else if (ch === "[" || ch === "{") depth++;
+    else if (ch === "]" || ch === "}") depth--;
+    if (depth < 0) return false;
+  }
+  return depth === 0 && !inSingle && !inDouble;
+}
+
+/**
+ * This converter only reads a simple subset of YAML. Rather than silently producing wrong JSON for
+ * constructs it can't read, it stops with a clear error that names the line.
+ */
+function assertSupported(text: string, lines: LogicalLine[]): void {
+  // More than one document in the text.
+  let seenContent = false;
+  const rawLines = text.split(/\r?\n/);
+  for (let idx = 0; idx < rawLines.length; idx++) {
+    const raw = rawLines[idx];
+    if (/^---(\s|$)/.test(raw)) {
+      if (seenContent) throw new Error(`Line ${idx + 1}: more than one YAML document (separated by ---) isn't supported. Convert one document at a time.`);
+      continue;
+    }
+    if (/^\.\.\.\s*$/.test(raw)) continue;
+    const body = stripComment(raw).trim();
+    if (body !== "") seenContent = true;
+  }
+
+  for (let i = 0; i < lines.length; i++) {
+    const { content, lineNo, indent } = lines[i];
+    if (/^-\s+-(\s|$)/.test(content)) {
+      throw new Error(`Line ${lineNo}: a list inside a list ("- - item") isn't supported.`);
+    }
+    const rest = content.replace(/^(-\s+)+/, "");
+    const colon = findTopLevelColon(rest);
+    const key = colon > -1 ? rest.slice(0, colon).trim() : "";
+    const value = (colon > -1 ? rest.slice(colon + 1) : rest).trim();
+
+    if (colon === -1 && !content.startsWith("-")) {
+      throw new Error(`Line ${lineNo}: expected "key: value" or a list item ("- item"). A lone value isn't supported.`);
+    }
+    if (key === "<<") throw new Error(`Line ${lineNo}: merge keys (<<) aren't supported.`);
+    if (/^[|>][+-]?\d*$/.test(value)) {
+      throw new Error(`Line ${lineNo}: block text (a value written with | or >) isn't supported.`);
+    }
+    if (/^[&*!][^\s]/.test(value)) {
+      throw new Error(`Line ${lineNo}: anchors, aliases and tags (&name, *name, !tag) aren't supported.`);
+    }
+    if ((value.startsWith("[") || value.startsWith("{")) && !bracketsBalanced(value)) {
+      throw new Error(`Line ${lineNo}: brackets are not closed on this line. Lists and mappings in [ ] or { } must fit on one line.`);
+    }
+    if ((value.startsWith("'") || value.startsWith('"')) && !bracketsBalanced(value)) {
+      throw new Error(`Line ${lineNo}: quoted text isn't closed on this line. Text that continues over several lines isn't supported.`);
+    }
+    // A value written on the same line as its key (or a plain list item) can't be followed by more indented lines.
+    if (value !== "" && !value.startsWith("[") && !value.startsWith("{")) {
+      const keyColumn = indent + (content.length - rest.length) + (colon > -1 ? 0 : 0);
+      const next = lines[i + 1];
+      if (next && next.indent > keyColumn && (colon > -1 || content.startsWith("-"))) {
+        throw new Error(`Line ${next.lineNo}: this line continues the value above it. Values that continue over several lines aren't supported.`);
+      }
+    }
+  }
+}
+
 export function parseYaml(text: string): YamlParseResult {
   try {
     const lines = preprocess(text);
     if (lines.length === 0) return { success: true, value: null };
-    const { value } = parseBlock(lines, 0);
+    assertSupported(text, lines);
+    const { value, nextIdx } = parseBlock(lines, 0);
+    if (nextIdx < lines.length) {
+      throw new Error(`Line ${lines[nextIdx].lineNo}: this line could not be understood (unexpected indentation or unsupported YAML).`);
+    }
     return { success: true, value };
   } catch (err) {
     return { success: false, error: err instanceof Error ? err.message : "Failed to parse YAML." };

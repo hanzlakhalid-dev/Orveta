@@ -24,6 +24,7 @@ import {
   type OooFormState,
   type OooReason,
   type OooTone,
+  oooDateWarning,
 } from "@/lib/generators/ooo";
 
 export function OooGeneratorTool() {
@@ -117,6 +118,12 @@ export function OooGeneratorTool() {
               />
             </div>
           </div>
+
+          {oooDateWarning(form) && (
+            <p className="rounded-lg border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive">
+              {oooDateWarning(form)}
+            </p>
+          )}
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="space-y-1.5">

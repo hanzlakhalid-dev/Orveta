@@ -63,6 +63,12 @@ export function CurlConverterTool() {
               <span className="truncate font-mono text-xs text-muted-foreground">{parsed.url}</span>
             </div>
           )}
+
+          {parsed && parsed.ignored.length > 0 && (
+            <p className="rounded-lg border border-border bg-secondary/30 p-3 text-xs text-muted-foreground">
+              Not converted: <span className="font-mono">{parsed.ignored.join(" ")}</span>. These options have no equivalent in the generated code, so check the result.
+            </p>
+          )}
         </CardContent>
       </Card>
 

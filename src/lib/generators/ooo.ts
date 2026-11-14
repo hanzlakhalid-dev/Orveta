@@ -143,3 +143,11 @@ export const defaultOooForm: OooFormState = {
   backupEmail: "",
   note: "",
 };
+
+/** Returns a warning when the "Back in office" date is earlier than the "First day away" date. */
+export function oooDateWarning(form: Pick<OooFormState, "startDate" | "endDate">): string | null {
+  if (form.startDate && form.endDate && form.endDate < form.startDate) {
+    return "The \"Back in office\" date is earlier than the \"First day away\" date. Check your dates.";
+  }
+  return null;
+}

@@ -21,10 +21,12 @@ const CLAUSE_STARTERS: string[][] = [
 interface Token {
   text: string;
   isString: boolean;
+  // Line comments (starting with two dashes) and block comments. Treated like quoted text: never reformatted or capitalised.
+  isComment: boolean;
   precededBySpace: boolean;
 }
 
-const TOKEN_RE = /'(?:[^'\\]|\\.|'')*'|"(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*`|[(),;]|[^\s(),;'"`]+/g;
+const TOKEN_RE = /--[^\n]*|\/\*[\s\S]*?\*\/|'(?:[^'\\]|\\.|'')*'|"(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*`|[(),;]|[^\s(),;'"`]+/g;
 
 function tokenize(sql: string): Token[] {
   const tokens: Token[] = [];
@@ -32,14 +34,15 @@ function tokenize(sql: string): Token[] {
   let m: RegExpExecArray | null;
   while ((m = TOKEN_RE.exec(sql)) !== null) {
     const text = m[0];
-    const isString = /^['"`]/.test(text);
+    const isComment = text.startsWith("--") || text.startsWith("/*");
+    const isString = isComment || /^['"`]/.test(text);
     const precededBySpace = m.index === 0 || /\s/.test(sql[m.index - 1]);
-    tokens.push({ text, isString, precededBySpace });
+    tokens.push({ text, isString, isComment, precededBySpace });
   }
   return tokens;
 }
 
-function buildLines(raw: string): string[] {
+function buildLines(raw: string, compact = false): string[] {
   const input = raw.trim();
   if (!input) return [];
 
@@ -63,6 +66,22 @@ function buildLines(raw: string): string[] {
 
   let i = 0;
   while (i < tokens.length) {
+    if (tokens[i].isComment) {
+      const text = tokens[i].text;
+      const isLine = text.startsWith("--");
+      if (compact) {
+        // On one line a "-- comment" would hide everything after it, so it is rewritten as a block comment.
+        append(isLine ? "/* " + text.slice(2).replace(/\*\//g, "* /").trim() + " */" : text.replace(/\s+/g, " "));
+      } else if (isLine) {
+        append(text.trimEnd());
+        flush(); // a line comment always ends its line
+        current = "  ";
+      } else {
+        append(text);
+      }
+      i++;
+      continue;
+    }
     if (depth === 0) {
       let matched: string[] | null = null;
       for (const phrase of CLAUSE_STARTERS) {
@@ -140,7 +159,7 @@ function buildLines(raw: string): string[] {
 
   if (current.trim().length > 0) flush();
 
-  return lines.filter((line) => line.length > 0);
+  return lines.filter((line) => line.trim().length > 0);
 }
 
 /** Formats raw SQL into clean, multi-line, uppercase-keyword output. */
@@ -150,7 +169,7 @@ export function formatSql(raw: string): string {
 
 /** Collapses formatted SQL back into a single, uppercase-keyword line. */
 export function compactSql(raw: string): string {
-  return buildLines(raw)
+  return buildLines(raw, true)
     .map((line) => line.trim())
     .join(" ");
 }
