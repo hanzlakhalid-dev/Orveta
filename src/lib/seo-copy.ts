@@ -117,7 +117,7 @@ export const toolSeoCopy: Record<string, SeoCopy> = {
   },
   "quality-score-estimator": {
     title: "Google Ads Quality Score & Cost Estimator",
-    description: "Rate expected CTR, ad relevance and landing page experience for an estimated Quality Score and its likely effect on CPC.",
+    description: "Rate expected CTR, ad relevance and landing page experience for a rough Quality Score estimate and an illustrative CPC effect.",
   },
   "influencer-rate-calculator": {
     title: "Influencer Sponsorship Rate Calculator",

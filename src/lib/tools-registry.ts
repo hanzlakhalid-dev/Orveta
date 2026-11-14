@@ -1460,9 +1460,9 @@ export const tools: Tool[] = [
   {
     slug: "quality-score-estimator",
     name: "Google Ads Quality Score Breakdown & Cost Estimator",
-    tagline: "See how your three Quality Score components affect what you actually pay.",
+    tagline: "See how your three Quality Score ratings might affect your cost, using a simplified model.",
     description:
-      "Rate your Expected CTR, Ad Relevance, and Landing Page Experience, and get an estimated Quality Score along with its likely relative CPC impact — grounded in Google's documented Ad Rank formula, where cost scales inversely with Quality Score.",
+      "Rate expected CTR, ad relevance and landing page experience to get a rough Quality Score estimate and an illustrative CPC effect, based on a simplified model.",
     category: "marketing",
     icon: Gauge,
     isNew: true,
@@ -1478,28 +1478,28 @@ export const tools: Tool[] = [
       "Rate each of the three components — Expected CTR, Landing Page Experience, Ad Relevance — as shown in your Google Ads account.",
       "Review your estimated Quality Score and its relative CPC impact versus an average advertiser.",
       "Optionally enter your current average CPC to see projected costs at different Quality Score levels.",
-      "Use the projection table to see how much improving your score could realistically save.",
+      "Use the projection table to see how your cost could change under this simplified model.",
     ],
     faq: [
       {
         question: "Is this Google's actual Quality Score formula?",
         answer:
-          "No — Google doesn't publish its exact formula or component weights. This estimate uses commonly-cited third-party weightings for the three components, and models the cost relationship using Google's own documented Ad Rank formula (bid × Quality Score), which implies cost scales inversely with your score.",
+          "No. Google doesn't publish its exact formula or component weights, and Google says Quality Score is a diagnostic tool, not an input in the ad auction. This estimate uses fixed weights chosen for this tool, based on third-party analyses, and a simple rule that cost changes in inverse proportion to the score.",
       },
       {
-        question: "Why does cost scale inversely with Quality Score?",
+        question: "Why does the tool show cost changing inversely with the score?",
         answer:
-          "Because Ad Rank = Bid × Quality Score, two advertisers achieving the same Ad Rank (and therefore the same ad position) must have bids that are inversely proportional to their Quality Scores — a higher score lets you bid less for the same position.",
+          "It is a simplification. Advertisers often describe a higher quality score as letting you pay less for the same position, so the tool turns that idea into a simple rule: cost is proportional to 5 divided by the score. Google doesn't publish such a rule, and real auctions use Ad Rank, which depends on auction-time quality, bids, competitors, thresholds and other factors.",
       },
       {
         question: "Does the exact percentage shown actually apply to my account?",
         answer:
-          "Treat it as directional. Real auctions also depend on competitor bids, ad rank thresholds, and other factors Google doesn't fully disclose — this shows the shape of the relationship, not a guaranteed dollar figure.",
+          "Treat it as a rough illustration. Real auctions also depend on competitor bids, thresholds and other factors Google doesn't fully disclose. This shows the idea of the relationship, not a prediction of your costs.",
       },
       {
         question: "Which component should I prioritize improving?",
         answer:
-          "Google has stated Expected CTR is generally weighted most heavily of the three, which lines up with the commonly-cited third-party weightings used here — testing ad copy to improve CTR is often the highest-leverage place to start.",
+          "In this tool's model, expected CTR and landing page experience carry the most weight (39% each) and ad relevance 22%. Google doesn't publish component weights, so use the three ratings in your Google Ads account to find which one is weakest and start there.",
       },
     ],
   },

@@ -23,15 +23,21 @@ export interface AspectRatioResult {
 export function calculateAspectRatio(width: number, height: number): AspectRatioResult | null {
   if (!Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0) return null;
 
-  const roundedW = Math.round(width);
-  const roundedH = Math.round(height);
-  const divisor = gcd(roundedW, roundedH) || 1;
-  const simplifiedW = roundedW / divisor;
-  const simplifiedH = roundedH / divisor;
+  let simplifiedW: number;
+  let simplifiedH: number;
+  if (Number.isInteger(width) && Number.isInteger(height)) {
+    const divisor = gcd(width, height) || 1;
+    simplifiedW = width / divisor;
+    simplifiedH = height / divisor;
+  } else {
+    // Decimal input: keep the exact ratio (width over 1) instead of rounding the inputs first.
+    simplifiedW = Number((width / height).toPrecision(4));
+    simplifiedH = 1;
+  }
   const decimalRatio = width / height;
   const paddingTopPercent = (height / width) * 100;
 
-  const modernCss = `.container {\n  aspect-ratio: ${trimNum(simplifiedW, 3)} / ${trimNum(simplifiedH, 3)};\n}`;
+  const modernCss = `.container {\n  aspect-ratio: ${trimNum(simplifiedW, 6)} / ${trimNum(simplifiedH, 6)};\n}`;
 
   const legacyCss = `.container {\n  position: relative;\n  width: 100%;\n  padding-top: ${trimNum(paddingTopPercent, 4)}%;\n}\n\n.container > * {\n  position: absolute;\n  inset: 0;\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n}`;
 

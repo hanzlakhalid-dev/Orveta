@@ -1,10 +1,17 @@
 export interface CsvData {
   headers: string[];
   rows: string[][];
+  /** Rows that had more values than the header (the extra values are dropped). */
+  longerRowCount: number;
+  /** Rows that had fewer values than the header (empty values are added). */
+  shorterRowCount: number;
+  /** Set when the header looks semicolon- or tab-separated, which this tool does not read. */
+  delimiterHint: "semicolon" | "tab" | null;
 }
 
 /** Parses CSV text (RFC-4180-ish: quoted fields, escaped "" quotes, commas/newlines inside quotes). */
 export function parseCsv(text: string): CsvData {
+  text = text.replace(/^\uFEFF/, ""); // byte-order mark added by some spreadsheet exports
   const rows: string[][] = [];
   let row: string[] = [];
   let field = "";
@@ -64,17 +71,29 @@ export function parseCsv(text: string): CsvData {
   if (field !== "" || row.length > 0) pushRow();
 
   const nonEmpty = rows.filter((r) => !(r.length === 1 && r[0] === ""));
-  if (nonEmpty.length === 0) return { headers: [], rows: [] };
+  if (nonEmpty.length === 0) return { headers: [], rows: [], longerRowCount: 0, shorterRowCount: 0, delimiterHint: null };
 
   const [headers, ...dataRows] = nonEmpty;
   const width = headers.length;
+  let longerRowCount = 0;
+  let shorterRowCount = 0;
   const normalized = dataRows.map((r) => {
     if (r.length === width) return r;
-    if (r.length < width) return [...r, ...Array(width - r.length).fill("")];
+    if (r.length < width) {
+      shorterRowCount++;
+      return [...r, ...Array(width - r.length).fill("")];
+    }
+    longerRowCount++;
     return r.slice(0, width);
   });
 
-  return { headers, rows: normalized };
+  let delimiterHint: CsvData["delimiterHint"] = null;
+  if (width === 1) {
+    if (headers[0].includes(";")) delimiterHint = "semicolon";
+    else if (headers[0].includes("\t")) delimiterHint = "tab";
+  }
+
+  return { headers, rows: normalized, longerRowCount, shorterRowCount, delimiterHint };
 }
 
 function csvEscape(value: string): string {

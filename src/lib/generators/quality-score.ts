@@ -35,10 +35,9 @@ export function estimateQualityScore(ratings: ComponentRatings): number {
 }
 
 /**
- * Google's documented Ad Rank formula is (simplified): Ad Rank = Max CPC bid x Quality Score.
- * For two advertisers achieving the same Ad Rank, their required bids are inversely proportional
- * to their Quality Scores. This models relative CPC against a Quality Score of 5 (commonly cited
- * as the historical account-wide average, and as the "neutral point" in Quality Score literature).
+ * Simplified illustration only. Google says Quality Score is a diagnostic and not an auction input,
+ * and it doesn't publish a formula. This models cost as inversely proportional to the score, relative
+ * to a score of 5 (a convention used by this tool as the neutral point).
  */
 const BASELINE_QS = 5;
 

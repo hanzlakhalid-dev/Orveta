@@ -130,11 +130,13 @@ export function QualityScoreEstimatorTool() {
         <div className="flex items-start gap-2.5 rounded-lg border border-border bg-secondary/40 p-3.5">
           <Info className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
           <p className="text-xs leading-relaxed text-muted-foreground">
-            Google doesn't publish its exact Quality Score formula or component weights. This
-            estimate is grounded in Google's documented Ad Rank formula (bid × Quality Score),
-            which implies cost scales inversely with your score — but real auctions also depend
-            on competitor bids, ad rank thresholds, and factors Google doesn't disclose. Treat
-            this as directional, not a guaranteed cost prediction.
+            Google doesn't publish its exact Quality Score formula or component weights, and
+            Google says Quality Score is a diagnostic tool, not an input in the ad auction. This
+            estimate is a simplified model: your three ratings are turned into a 1–10 score using
+            fixed weights chosen for this tool, and cost is assumed to change inversely with that
+            score. Real auctions depend on Ad Rank, which uses auction-time quality, bids,
+            competitors, thresholds and other factors. Treat this as a rough illustration, not a
+            prediction.
           </p>
         </div>
       </div>

@@ -125,6 +125,26 @@ export function CsvDuplicateCleanerTool() {
         </CardContent>
       </Card>
 
+      {(parsed.delimiterHint || parsed.longerRowCount > 0 || parsed.shorterRowCount > 0) && (
+        <div className="space-y-2 rounded-lg border border-border bg-secondary/30 p-3 text-sm text-muted-foreground">
+          {parsed.delimiterHint && (
+            <p>
+              This file looks {parsed.delimiterHint}-separated. This tool reads commas only, so every row is treated as a single column.
+            </p>
+          )}
+          {parsed.longerRowCount > 0 && (
+            <p>
+              {parsed.longerRowCount} {parsed.longerRowCount === 1 ? "row has" : "rows have"} more values than the header row. The extra values are dropped from the cleaned file. Check that the header row lists all your columns.
+            </p>
+          )}
+          {parsed.shorterRowCount > 0 && (
+            <p>
+              {parsed.shorterRowCount} {parsed.shorterRowCount === 1 ? "row has" : "rows have"} fewer values than the header row. Empty values were added.
+            </p>
+          )}
+        </div>
+      )}
+
       {parsed.headers.length > 0 && (
         <Card>
           <CardHeader>
