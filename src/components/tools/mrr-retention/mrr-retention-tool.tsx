@@ -20,16 +20,19 @@ export function MrrRetentionTool() {
   }
 
   const results = calculateMrrMetrics(input);
+  // Percentages are measured against the starting MRR, so they mean nothing when it is zero.
+  const hasBase = input.startingMrr > 0;
+  const pct = (value: number) => (hasBase ? `${value.toFixed(1)}%` : "—");
 
   function summaryText() {
     return [
       `Starting MRR: ${formatCurrency(input.startingMrr, "USD")}`,
       `New: +${formatCurrency(input.newMrr, "USD")} | Expansion: +${formatCurrency(input.expansionMrr, "USD")} | Contraction: -${formatCurrency(input.contractionMrr, "USD")} | Churned: -${formatCurrency(input.churnedMrr, "USD")}`,
-      `Ending MRR: ${formatCurrency(results.endingMrr, "USD")} (${results.growthRatePercent >= 0 ? "+" : ""}${results.growthRatePercent.toFixed(1)}%)`,
+      `Ending MRR: ${formatCurrency(results.endingMrr, "USD")} (${hasBase ? `${results.growthRatePercent >= 0 ? "+" : ""}${results.growthRatePercent.toFixed(1)}%` : "—"})`,
       "",
-      `Net Revenue Retention (NRR): ${results.nrrPercent.toFixed(1)}%`,
-      `Gross Revenue Retention (GRR): ${results.grrPercent.toFixed(1)}%`,
-      `Net churn: ${results.netChurnPercent.toFixed(1)}% | Gross churn: ${results.grossChurnPercent.toFixed(1)}%`,
+      `Net Revenue Retention (NRR): ${pct(results.nrrPercent)}`,
+      `Gross Revenue Retention (GRR): ${pct(results.grrPercent)}`,
+      `Net churn: ${pct(results.netChurnPercent)} | Gross churn: ${pct(results.grossChurnPercent)}`,
     ].join("\n");
   }
 
@@ -126,17 +129,21 @@ export function MrrRetentionTool() {
               <span
                 className={cn(
                   "font-mono text-sm font-semibold",
-                  results.growthRatePercent >= 0 ? "text-success" : "text-destructive"
+                  !hasBase ? "text-muted-foreground" : results.growthRatePercent >= 0 ? "text-success" : "text-destructive"
                 )}
               >
-                {results.growthRatePercent >= 0 ? "+" : ""}
-                {results.growthRatePercent.toFixed(1)}%
+                {hasBase ? `${results.growthRatePercent >= 0 ? "+" : ""}${results.growthRatePercent.toFixed(1)}%` : "—"}
               </span>
             </div>
             <p className="mt-1 text-xs text-muted-foreground">
               Net new MRR this period: {results.netNewMrr >= 0 ? "+" : ""}
               {formatCurrency(results.netNewMrr, "USD")}
             </p>
+            {!hasBase && (
+              <p className="mt-1 text-xs text-muted-foreground">
+                Percentages need a starting MRR above zero, so they are shown as dashes.
+              </p>
+            )}
           </CardContent>
         </Card>
 
@@ -149,27 +156,27 @@ export function MrrRetentionTool() {
             <div className="grid grid-cols-2 gap-4">
               <RetentionStat
                 label="Net Revenue Retention"
-                value={`${results.nrrPercent.toFixed(1)}%`}
-                good={results.nrrPercent >= 100}
+                value={pct(results.nrrPercent)}
+                good={hasBase && results.nrrPercent >= 100}
               />
               <RetentionStat
                 label="Gross Revenue Retention"
-                value={`${results.grrPercent.toFixed(1)}%`}
-                good={results.grrPercent >= 90}
+                value={pct(results.grrPercent)}
+                good={hasBase && results.grrPercent >= 90}
               />
             </div>
             <Separator />
             <div className="grid grid-cols-2 gap-4">
               <RetentionStat
                 label="Net churn"
-                value={`${results.netChurnPercent.toFixed(1)}%`}
-                good={results.netChurnPercent <= 0}
+                value={pct(results.netChurnPercent)}
+                good={hasBase && results.netChurnPercent <= 0}
                 invert
               />
               <RetentionStat
                 label="Gross churn"
-                value={`${results.grossChurnPercent.toFixed(1)}%`}
-                good={results.grossChurnPercent <= 3}
+                value={pct(results.grossChurnPercent)}
+                good={hasBase && results.grossChurnPercent <= 3}
                 invert
               />
             </div>

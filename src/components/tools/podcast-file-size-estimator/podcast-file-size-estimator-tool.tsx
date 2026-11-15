@@ -159,6 +159,7 @@ export function PodcastFileSizeEstimatorTool() {
                 <p className="mt-1 text-xs text-muted-foreground">
                   ≈ {result.perMinuteMb.toFixed(2)} MB per minute
                 </p>
+                <p className="mt-1 text-xs text-muted-foreground">1 MB = 1,048,576 bytes</p>
               </div>
 
               {Number(downloads) > 0 && (
@@ -178,8 +179,8 @@ export function PodcastFileSizeEstimatorTool() {
                 {format === "wav"
                   ? "WAV is uncompressed — great for editing masters, but far too large for a public podcast feed. Export your final episode as MP3 or AAC."
                   : channels === "mono"
-                  ? "Mono is the standard choice for spoken-word podcasts — it sounds identical to stereo for a single voice and halves your file size at the same perceived quality."
-                  : "Stereo makes sense for music-heavy or multi-mic recordings, but roughly doubles file size versus mono at the same bitrate."}
+                  ? "Mono is a common choice for spoken-word podcasts. A single voice sounds the same, and a mono file can use a lower bitrate (for example 64 instead of 128 kbps) with similar quality. In this tool, size depends on the bitrate you choose, not on the mono or stereo setting."
+                  : "Stereo suits music-heavy or multi-microphone recordings and is often given a higher bitrate. In this tool, size depends on the bitrate you choose, not on the mono or stereo setting."}
               </p>
             </div>
           )}

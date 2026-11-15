@@ -39,7 +39,11 @@ function stripTags(html: string): string {
 }
 
 /** Extracts every h1–h6 tag from raw HTML source, in document order, with tags stripped from the heading text. */
-export function extractHeadings(html: string): HeadingNode[] {
+export function extractHeadings(rawHtml: string): HeadingNode[] {
+  // Ignore comments, scripts and styles: headings written inside them aren't part of the page outline.
+  const html = rawHtml
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, "");
   const regex = /<h([1-6])\b[^>]*>([\s\S]*?)<\/h\1>/gi;
   const headings: HeadingNode[] = [];
   let m: RegExpExecArray | null;
