@@ -25,14 +25,14 @@ function tokenize(text: string, granularity: DiffGranularity): string[] {
 /** Caps the DP table size so pasting very large text doesn't hang the browser tab. */
 const MAX_CELLS = 2_500_000;
 
-function lcsDiff(a: string[], b: string[]): { ops: DiffToken[]; truncated: boolean } {
+function lcsDiff(a: string[], b: string[], separator: string): { ops: DiffToken[]; truncated: boolean } {
   const n = a.length;
   const m = b.length;
 
   if (n * m > MAX_CELLS) {
     const ops: DiffToken[] = [];
-    if (n) ops.push({ type: "remove", value: a.join("") });
-    if (m) ops.push({ type: "add", value: b.join("") });
+    if (n) ops.push({ type: "remove", value: a.join(separator) });
+    if (m) ops.push({ type: "add", value: b.join(separator) });
     return { ops, truncated: true };
   }
 
@@ -89,14 +89,23 @@ export function computeDiff(a: string, b: string, granularity: DiffGranularity):
 
   const tokensA = tokenize(a, granularity);
   const tokensB = tokenize(b, granularity);
-  const { ops, truncated } = lcsDiff(tokensA, tokensB);
+  const { ops, truncated } = lcsDiff(tokensA, tokensB, granularity === "line" ? "\n" : "");
   const tokens = granularity === "line" ? ops : mergeConsecutive(ops);
 
+  // The counters count lines, words or characters. In word view the spaces between words are not counted.
+  const countable = (value: string) => granularity !== "word" || value.trim() !== "";
   let added = 0;
   let removed = 0;
-  for (const op of ops) {
-    if (op.type === "add") added++;
-    else if (op.type === "remove") removed++;
+  if (truncated) {
+    // The simplified view shows all of the first text as removed and all of the second as added.
+    removed = tokensA.filter(countable).length;
+    added = tokensB.filter(countable).length;
+  } else {
+    for (const op of ops) {
+      if (!countable(op.value)) continue;
+      if (op.type === "add") added++;
+      else if (op.type === "remove") removed++;
+    }
   }
 
   return {
