@@ -51,7 +51,16 @@ function checkIndentation(raw: string): ComposeIssue[] {
   return issues;
 }
 
-const LEGACY_SERVICE_KEYS = new Set(["links", "volumes_from", "extends"]);
+// Only "links" is legacy. "extends" and "volumes_from" are still documented, supported service settings.
+/** True when the text has a full-line or trailing # comment (text inside quotes is ignored). */
+function hasComments(raw: string): boolean {
+  return raw.split(/\r?\n/).some((line) => {
+    const withoutQuoted = line.replace(/(["'])(?:(?!\1).)*\1/g, "");
+    return /^\s*#/.test(withoutQuoted) || /\s#/.test(withoutQuoted);
+  });
+}
+
+const LEGACY_SERVICE_KEYS = new Set(["links"]);
 
 /** Parses and inspects a docker-compose.yml file for common structural and syntax issues. */
 export function inspectCompose(raw: string): ComposeInspection {
@@ -71,6 +80,14 @@ export function inspectCompose(raw: string): ComposeInspection {
 
   const value = parsed.value;
   const topLevelKeys = Object.keys(value);
+
+  // The formatted version is rebuilt from the parsed data, so comments are not carried over.
+  if (hasComments(raw)) {
+    issues.push({
+      severity: "info",
+      message: "Your file contains comments. They are not kept in the formatted version.",
+    });
+  }
 
   if ("version" in value) {
     issues.push({
