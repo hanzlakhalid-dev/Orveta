@@ -101,7 +101,10 @@ export function StreamBitrateMatrixTool() {
             <div className="space-y-4">
               <div className="grid grid-cols-3 gap-3">
                 <div className="rounded-lg border border-border bg-secondary/30 p-3 text-center">
-                  <p className="text-lg font-semibold text-foreground">{result.videoKbps}</p>
+                  <p className="text-lg font-semibold text-foreground">
+                    {result.isEstimate ? "≈ " : ""}
+                    {result.videoKbps}
+                  </p>
                   <p className="text-[11px] text-muted-foreground">Video (kbps)</p>
                 </div>
                 <div className="rounded-lg border border-border bg-secondary/30 p-3 text-center">
@@ -133,6 +136,18 @@ export function StreamBitrateMatrixTool() {
                     : `This needs roughly ${result.requiredUploadMbps.toFixed(1)} Mbps of upload with headroom — try a lower resolution, frame rate, or bitrate.`}
                 </p>
               </div>
+
+              {result.isEstimate && (
+                <p className="text-xs leading-relaxed text-muted-foreground">
+                  ≈ Not published by the platform — an estimate.
+                </p>
+              )}
+              {platform === "youtube" && (
+                <p className="text-xs leading-relaxed text-muted-foreground">
+                  YouTube also lists lower minimum bitrates (for example 6,000 kbps for 1080p at 60 fps). If your upload
+                  speed is limited, you can stream below the recommendation, with lower quality.
+                </p>
+              )}
 
               <dl className="space-y-2 text-sm">
                 <div className="flex justify-between border-b border-border/60 py-1.5">

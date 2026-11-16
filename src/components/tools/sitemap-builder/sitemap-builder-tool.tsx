@@ -167,12 +167,18 @@ export function SitemapBuilderTool() {
           </div>
           <div className="mt-5 flex items-start gap-2.5 rounded-lg border border-border bg-secondary/40 p-3.5">
             <Info className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
-            <p className="text-xs leading-relaxed text-muted-foreground">
-              Google has stated it ignores the priority and changefreq values for ranking or
-              crawling decisions — they're valid per the sitemap protocol and some other crawlers
-              may still use them, but don't expect adjusting these numbers to influence Google
-              search rankings.
-            </p>
+            <div className="space-y-2 text-xs leading-relaxed text-muted-foreground">
+              <p>
+                Google has stated it ignores the priority and changefreq values for ranking or
+                crawling decisions — they're valid per the sitemap protocol and some other crawlers
+                may still use them, but don't expect adjusting these numbers to influence Google
+                search rankings.
+              </p>
+              <p>
+                Every URL starts with today's date. Google uses lastmod only when it is consistently accurate, so change
+                it to each page's real last-modified date, or clear it to leave the tag out.
+              </p>
+            </div>
           </div>
         </CardContent>
       </Card>

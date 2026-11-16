@@ -17,24 +17,33 @@ export const resolutionOptions: ResolutionOption[] = [
 ];
 
 /**
- * Recommended video bitrates (kbps), based on Twitch's and YouTube Live's published broadcaster
- * guidelines. These are general-purpose defaults for a single non-partner-tier broadcast — always
- * double-check the platform's current help docs, since limits do shift over time.
+ * Video bitrates (kbps) for H.264 with constant bitrate. A value is taken from the platform's own
+ * published guidance unless it is marked estimate: true, which means the platform does not publish
+ * that combination and the value is this tool's own estimate.
+ *  - Twitch: Broadcasting Guidelines (1080p60 6000, 1080p30 4500, 900p60 6000, 720p60 4500, 720p30 3000).
+ *  - YouTube: "Choose live encoder settings, bitrates, and resolutions", recommended H.264 column
+ *    (1080p60 17000, 1080p30 14000, 720p 8000, 480p and 360p at 30 fps 4000). Platforms change their
+ *    guidance, so re-check these against the current help pages from time to time.
  */
-const BITRATE_TABLE: Record<Platform, Record<string, Record<FrameRate, number>>> = {
+interface BitrateValue {
+  kbps: number;
+  estimate?: boolean;
+}
+
+const BITRATE_TABLE: Record<Platform, Record<string, Record<FrameRate, BitrateValue>>> = {
   twitch: {
-    "1080p": { 30: 6000, 60: 6000 },
-    "900p": { 30: 4500, 60: 5000 },
-    "720p": { 30: 3500, 60: 4500 },
-    "480p": { 30: 2000, 60: 2500 },
-    "360p": { 30: 1000, 60: 1500 },
+    "1080p": { 30: { kbps: 4500 }, 60: { kbps: 6000 } },
+    "900p": { 30: { kbps: 4500, estimate: true }, 60: { kbps: 6000 } },
+    "720p": { 30: { kbps: 3000 }, 60: { kbps: 4500 } },
+    "480p": { 30: { kbps: 2000, estimate: true }, 60: { kbps: 2500, estimate: true } },
+    "360p": { 30: { kbps: 1000, estimate: true }, 60: { kbps: 1500, estimate: true } },
   },
   youtube: {
-    "1080p": { 30: 4500, 60: 6750 },
-    "900p": { 30: 3500, 60: 5000 },
-    "720p": { 30: 2750, 60: 4000 },
-    "480p": { 30: 1250, 60: 2000 },
-    "360p": { 30: 700, 60: 1000 },
+    "1080p": { 30: { kbps: 14000 }, 60: { kbps: 17000 } },
+    "900p": { 30: { kbps: 11000, estimate: true }, 60: { kbps: 12500, estimate: true } },
+    "720p": { 30: { kbps: 8000 }, 60: { kbps: 8000 } },
+    "480p": { 30: { kbps: 4000 }, 60: { kbps: 4000, estimate: true } },
+    "360p": { 30: { kbps: 4000 }, 60: { kbps: 4000, estimate: true } },
   },
 };
 
@@ -45,6 +54,8 @@ const UPLOAD_HEADROOM_FACTOR = 0.8;
 
 export interface BitrateMatrixResult {
   videoKbps: number;
+  /** True when the platform does not publish this combination and the value is an estimate. */
+  isEstimate: boolean;
   audioKbps: number;
   totalKbps: number;
   requiredUploadMbps: number;
@@ -65,7 +76,7 @@ export function getBitrateRecommendation(
   const table = BITRATE_TABLE[platform]?.[resolutionId];
   if (!table) return null;
 
-  const videoKbps = table[fps];
+  const videoKbps = table[fps].kbps;
   const audioKbps = AUDIO_BITRATE_KBPS;
   const totalKbps = videoKbps + audioKbps;
   const requiredUploadKbps = totalKbps / UPLOAD_HEADROOM_FACTOR;
@@ -77,6 +88,7 @@ export function getBitrateRecommendation(
 
   return {
     videoKbps,
+    isEstimate: table[fps].estimate === true,
     audioKbps,
     totalKbps,
     requiredUploadMbps,
