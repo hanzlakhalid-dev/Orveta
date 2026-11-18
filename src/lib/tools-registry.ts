@@ -54,6 +54,11 @@ export const tools: Tool[] = [
         answer:
           "No. The tool runs in your browser and doesn't send what you type to a server, and it doesn't save it once you leave the page.",
       },
+      {
+        question: "Should I say why I'm away?",
+        answer:
+          "You don't have to. The sick and parental leave options state that reason in a message anyone can read. Choose General leave if you'd rather not say.",
+      },
     ],
   },
   {
@@ -192,7 +197,7 @@ export const tools: Tool[] = [
       {
         question: "Can I adjust the numbers while the meeting is running?",
         answer:
-          "Yes. If someone joins late or leaves early, update the attendee count or wage at any point and the running total adjusts immediately.",
+          "Yes, but the whole elapsed time is recalculated at the new numbers, so earlier minutes are re-priced. If someone joins late, the total will be a little higher than the meeting actually cost up to that point.",
       },
       {
         question: "Where do I get an average hourly wage for the group?",
@@ -203,6 +208,11 @@ export const tools: Tool[] = [
         question: "Does pausing reset the counter?",
         answer:
           "No. Pause freezes the total exactly where it is so you can screenshot or copy it, and \"Resume\" picks back up from that point. Only \"Reset\" clears it to zero.",
+      },
+      {
+        question: "Is the wage the real cost of an hour?",
+        answer:
+          "No. An hour of someone's time usually costs more than their wage because of benefits, taxes and overhead. Enter a higher rate if you want a fuller picture.",
       },
     ],
   },
@@ -299,6 +309,11 @@ export const tools: Tool[] = [
         answer:
           "No — \"ad spend\" here represents your total cost of acquiring the sale through ads, whatever platform you use. If you track platform fees separately from bid spend, add them together before comparing to the max ad spend figure.",
       },
+      {
+        question: "What does this leave out?",
+        answer:
+          "Everything is per unit. Returns, refunds, discounts, taxes and overhead aren't included, and shipping you charge customers isn't counted as income. Add any of these to your costs if they apply.",
+      },
     ],
   },
   {
@@ -327,7 +342,7 @@ export const tools: Tool[] = [
       {
         question: "What's the difference between ROAS and ROI here?",
         answer:
-          "ROAS is revenue divided by ad spend, shown as a multiplier (e.g. 3.5x). ROI is the percentage profit relative to spend after subtracting the spend itself — a 3.5x ROAS is a 250% ROI, since you netted 2.5x your spend as profit.",
+          "ROAS is revenue divided by ad spend, shown as a multiplier (e.g. 3.5x). ROI here is revenue minus ad spend, divided by ad spend — a 3.5x ROAS is a 250% ROI. It treats all revenue as return, before product costs, shipping and fees, so profit-based ROI is lower.",
       },
       {
         question: "Are these blocks connected, or just calculated separately?",
@@ -389,6 +404,11 @@ export const tools: Tool[] = [
         answer:
           "Yes — UTM parameters are a widely-adopted standard, so most major analytics platforms (not just Google Analytics) recognize and parse these same parameters.",
       },
+      {
+        question: "Should I use capital letters in UTM values?",
+        answer:
+          "Pick one style, usually lower case, and use it everywhere. Most analytics tools treat \"Google\" and \"google\" as different values, so mixed capitalization splits your reports.",
+      },
     ],
   },
   {
@@ -427,12 +447,12 @@ export const tools: Tool[] = [
       {
         question: "How does combining multiple frameworks work?",
         answer:
-          "For each requirement — minimum length, rotation interval, lockout threshold, and so on — the tool takes the strictest value among every framework you've selected, so the result satisfies all of them at once.",
+          "For each requirement — minimum length, rotation interval, lockout threshold, and so on — the tool takes the strictest value among every framework you've selected, so the result is at least as strict as each baseline you selected.",
       },
       {
         question: "Why does NIST 800-63B look less strict than the others?",
         answer:
-          "NIST's modern guidance deliberately moved away from forced complexity rules and frequent mandatory rotation, favoring longer passwords and screening against known breached-password lists instead — that's current best practice, even though it looks more relaxed on paper.",
+          "NIST's modern guidance deliberately moved away from forced complexity rules and frequent mandatory rotation, favoring longer passwords and screening against known breached-password lists instead — that's current best practice, even though it looks more relaxed on paper. If you select NIST together with another framework, the stricter rules of the other framework still apply, so the result can include the complexity and rotation rules NIST advises against.",
       },
     ],
   },
@@ -478,6 +498,11 @@ export const tools: Tool[] = [
         question: "Is my information sent anywhere when I use this tool?",
         answer:
           "No — everything is generated directly in your browser. The tool doesn't transmit or store what you type.",
+      },
+      {
+        question: "Does this add a cookie consent banner?",
+        answer:
+          "No. Switching on cookies or advertising adds the matching sections to the policy text, but it doesn't add a banner or collect consent. Whether you need one depends on where your visitors are.",
       },
     ],
   },
@@ -624,6 +649,11 @@ export const tools: Tool[] = [
         answer:
           "No — contrast ratio is purely a function of the two colors. Font family only affects the live preview so you can judge actual readability, not the calculated ratio itself.",
       },
+      {
+        question: "Why does a ratio that looks like 4.5 sometimes fail?",
+        answer:
+          "The pass or fail is decided on the exact ratio, but the display shows two decimals. A ratio of 4.496, for example, is shown as 4.50 and doesn't reach 4.5.",
+      },
     ],
   },
   {
@@ -702,7 +732,7 @@ export const tools: Tool[] = [
       {
         question: "Why offer both Base64 and URL-encoded formats?",
         answer:
-          "Base64 is the more universally recognized format and always works, but adds roughly 33% overhead to the file size. URL-encoding often produces a smaller result for SVGs specifically, since SVG is already text-based — try both and use whichever is smaller for your case.",
+          "Base64 is the more universally recognized format and always works, but adds roughly 33% overhead to the file size. URL-encoding can be smaller for SVGs when only the necessary characters are escaped, but this tool escapes every special character, so its URL-encoded version can come out larger than Base64. Compare the sizes shown and use whichever is smaller.",
       },
       {
         question: "Is it safe to preview an SVG I don't fully trust?",
@@ -713,6 +743,11 @@ export const tools: Tool[] = [
         question: "When should I inline an SVG instead of linking to a file?",
         answer:
           "Inlining avoids an extra HTTP request, which helps for small, frequently-used icons — but for larger or rarely-changed SVGs, a normal file reference (cacheable by the browser) is usually more efficient. The size stats shown here can help you decide.",
+      },
+      {
+        question: "Why does my icon turn black?",
+        answer:
+          "An SVG used as an image or a CSS background can't use your page's CSS, so currentColor shows as black. Set the colors inside the SVG.",
       },
     ],
   },
@@ -797,7 +832,7 @@ export const tools: Tool[] = [
       {
         question: "What's considered a good NRR?",
         answer:
-          "Above 100% means your existing customers are spending more over time even before counting new logos — generally seen as a strong signal. Best-in-class SaaS companies often report NRR in the 110-130%+ range, though \"good\" varies a lot by company size and market.",
+          "Above 100% means your existing customers are spending more over time even before counting new logos — generally seen as a strong signal. What counts as \"good\" varies a lot by company size, customer type and market, so compare with companies like yours.",
       },
       {
         question: "What's the difference between net churn and gross churn?",
@@ -808,6 +843,11 @@ export const tools: Tool[] = [
         question: "Does this work for annual contracts, or just monthly?",
         answer:
           "The math works the same regardless of billing cadence — just be consistent about the period you're measuring (e.g., use ARR figures throughout instead of MRR if that's how you track revenue).",
+      },
+      {
+        question: "Why do I see dashes instead of percentages?",
+        answer:
+          "The percentages are measured against your starting MRR. If it is zero, they can't be calculated, so the tool shows dashes. Enter a starting MRR above zero to see them.",
       },
     ],
   },
@@ -925,7 +965,7 @@ export const tools: Tool[] = [
     howTo: [
       "Enter the equipment's purchase cost, useful life, and your effective tax rate.",
       "Enter the monthly lease payment you're being offered for the same equipment.",
-      "Set your analysis period and discount rate — the rate you'd otherwise earn or pay on capital.",
+      "Set your analysis period and discount rate — the rate you'd otherwise earn or pay on capital — and, if you expect to resell the equipment, its resale value.",
       "Compare the two NPV figures — whichever is higher (less negative) is the cheaper option in present-value terms.",
     ],
     faq: [
@@ -942,7 +982,7 @@ export const tools: Tool[] = [
       {
         question: "Does this account for the equipment's resale value?",
         answer:
-          "No — it assumes you keep and fully depreciate the equipment over the analysis period. If you plan to resell it, add the expected resale value as a positive cash flow in your own follow-up analysis.",
+          "Yes, optionally. Enter the resale value you expect at the end of the analysis period, after any tax, and it is added to the buying side in the last year. If you leave it at zero, the tool assumes the equipment has no resale value, which makes buying look worse than it may be.",
       },
       {
         question: "Is this a substitute for advice from an accountant?",
@@ -1087,12 +1127,17 @@ export const tools: Tool[] = [
       {
         question: "What should I put for \"purpose of disclosure\"?",
         answer:
-          "Be specific enough that it's clear what the agreement covers — e.g., \"evaluating a potential partnership around joint marketing\" rather than something vague like \"business purposes,\" which can weaken enforceability.",
+          "Be specific enough that it's clear what the agreement covers — e.g., \"evaluating a potential partnership around joint marketing\" rather than something vague like \"business purposes,\" which can make the scope of the agreement unclear.",
       },
       {
         question: "Can I use this for an employee NDA?",
         answer:
           "This is built for a standalone mutual/unilateral NDA between two parties, not full employment agreements — those typically include additional terms (IP assignment, non-compete, etc.) that a lawyer should draft separately.",
+      },
+      {
+        question: "How long do the confidentiality duties last?",
+        answer:
+          "The Term section sets how long the agreement runs and says the confidentiality duties continue for information shared during that time, but it doesn't state for how long. Many NDAs name a fixed period, so decide whether you need one and have a lawyer add it.",
       },
     ],
   },
@@ -1139,6 +1184,11 @@ export const tools: Tool[] = [
         answer:
           "They're standard timestamp claims: iat is when the token was issued, exp is when it expires, and nbf (\"not before\") is when it becomes valid. This tool converts any of these it finds into readable dates automatically.",
       },
+      {
+        question: "Can it read encrypted tokens?",
+        answer:
+          "No. Encrypted JWTs (JWE, with five parts) and encrypted SAML assertions can't be read. The tool also doesn't tell you whether a token has expired. It shows the exp, iat and nbf times in your browser's time zone.",
+      },
     ],
   },
   {
@@ -1183,6 +1233,11 @@ export const tools: Tool[] = [
         question: "Do I need this if I'm a small business?",
         answer:
           "If you collect any personal data from EU/UK or California residents, having a documented retention approach is good practice regardless of size — though the formality required scales with your risk and data volume. A privacy lawyer can advise on what's appropriate for you.",
+      },
+      {
+        question: "Why does every row say \"Automated deletion / anonymization\"?",
+        answer:
+          "The deletion method is the same for every row and can't be edited in this tool. If you delete data by hand or keep some of it longer, change that wording in the copied text.",
       },
     ],
   },
@@ -1229,6 +1284,11 @@ export const tools: Tool[] = [
         answer:
           "A too-strict CSP can silently block scripts, styles, or images from loading. Test thoroughly in a staging environment — many browsers also support a Content-Security-Policy-Report-Only header for testing a policy without enforcing it yet.",
       },
+      {
+        question: "Which directives does it cover?",
+        answer:
+          "Nine: default-src, script-src, style-src, img-src, font-src, connect-src, frame-src, media-src and object-src. It doesn't cover others such as frame-ancestors, base-uri, form-action or report-uri, and it has no support for nonces or hashes.",
+      },
     ],
   },
   {
@@ -1274,6 +1334,11 @@ export const tools: Tool[] = [
         answer:
           "Generally no — classification is meant to be a holistic look at the whole relationship, not a single deciding factor. This tool's score reflects an overall pattern, not a single-factor verdict.",
       },
+      {
+        question: "How is the risk percentage calculated?",
+        answer:
+          "The tool counts how many of the 13 statements you ticked and divides by 13. Every factor counts equally. Up to 25% is Low, above that up to 50% is Moderate, up to 75% is High and above 75% is Very High.",
+      },
     ],
   },
   {
@@ -1317,7 +1382,12 @@ export const tools: Tool[] = [
       {
         question: "Is this useful for a post-incident report?",
         answer:
-          "Yes — the copyable summary gives you a quick, defensible dollar figure to include when communicating impact to leadership, which is often more persuasive than describing an outage in purely technical terms.",
+          "Yes — the copyable summary gives you a quick dollar estimate to include when communicating impact to leadership, which is often more persuasive than describing an outage in purely technical terms. State the assumptions behind it.",
+      },
+      {
+        question: "Why count the wages of idle employees if I pay them anyway?",
+        answer:
+          "Idle labor measures lost working time, not extra cash out. It is included because the paid hours produced nothing during the outage. Set the number of idled employees to 0 if you only want lost revenue.",
       },
     ],
   },
@@ -1352,7 +1422,7 @@ export const tools: Tool[] = [
       {
         question: "Why does the tool mention USPTO's TESS system being retired?",
         answer:
-          "USPTO retired its older TESS search tool in 2023 in favor of a newer system with different, regex-based search syntax. If you see older guides referencing TESS wildcard syntax specifically, treat it as outdated and check the current system's own search help instead.",
+          "USPTO retired its older TESS search tool in 2023 in favor of a newer system with its own search syntax. If you see older guides referencing TESS wildcard syntax specifically, treat it as outdated and check the current system's own search help instead.",
       },
       {
         question: "Is a phonetic or lookalike match automatically a trademark conflict?",
@@ -1408,6 +1478,11 @@ export const tools: Tool[] = [
         question: "Does this account for shipping costs?",
         answer:
           "Not directly — if you absorb shipping cost into your product price rather than charging it separately, add it into your COGS figure so it's reflected in the required price.",
+      },
+      {
+        question: "What does the margin mean here?",
+        answer:
+          "It is the profit left after product cost, payment fees and ad cost, as a share of the selling price. Shipping, returns, taxes and overhead aren't included unless you add them to the product cost.",
       },
     ],
   },
@@ -1476,7 +1551,7 @@ export const tools: Tool[] = [
     ],
     howTo: [
       "Rate each of the three components — Expected CTR, Landing Page Experience, Ad Relevance — as shown in your Google Ads account.",
-      "Review your estimated Quality Score and its relative CPC impact versus an average advertiser.",
+      "Review your estimated Quality Score and its relative CPC impact versus a score of 5.",
       "Optionally enter your current average CPC to see projected costs at different Quality Score levels.",
       "Use the projection table to see how your cost could change under this simplified model.",
     ],
@@ -1547,6 +1622,11 @@ export const tools: Tool[] = [
         answer:
           "That's a personal call — gifted-only collaborations are common at smaller follower counts, but if your engagement or niche adds real value, you're not obligated to accept unpaid work. The calculated rate is a useful reference point either way.",
       },
+      {
+        question: "Does this use live market data?",
+        answer:
+          "No. The rates, multipliers and add-on percentages are fixed values built into the tool, so real rates for your niche and audience can be higher or lower. Use it as a starting point for negotiation.",
+      },
     ],
   },
   {
@@ -1593,6 +1673,11 @@ export const tools: Tool[] = [
         answer:
           "Per the sitemap protocol, a single sitemap file should contain no more than 50,000 URLs and be no larger than 50MB uncompressed — larger sites use a sitemap index file that links to multiple individual sitemaps.",
       },
+      {
+        question: "What date should I use for lastmod?",
+        answer:
+          "The date each page was last really changed. Google uses lastmod only when it is consistently accurate, so stamping every page with today's date makes it less useful. Clear the date to leave the tag out if you don't know it.",
+      },
     ],
   },
   {
@@ -1600,7 +1685,7 @@ export const tools: Tool[] = [
     name: "SPF & DKIM Email Record Syntax Validator",
     tagline: "Catch email authentication errors before they cause deliverability problems.",
     description:
-      "Paste a raw SPF or DKIM DNS record and get instant, client-side validation against the actual RFC standards — including the critical 10-DNS-lookup SPF limit, missing required tags, malformed IP addresses, and invalid base64 in DKIM public keys.",
+      "Paste a raw SPF or DKIM DNS record and get instant, client-side validation against key rules of the SPF and DKIM standards — including the critical 10-DNS-lookup SPF limit, missing required tags, malformed IP addresses, and invalid base64 in DKIM public keys.",
     category: "developer",
     icon: MailCheck,
     isNew: true,
@@ -1622,7 +1707,7 @@ export const tools: Tool[] = [
       {
         question: "Why does the 10-lookup limit matter so much for SPF?",
         answer:
-          "RFC 7208 caps the number of DNS-lookup-causing mechanisms (include, a, mx, ptr, exists) at 10. Exceeding it doesn't just weaken your SPF — it causes a permanent error, which many mail providers treat as an outright SPF failure for all your mail, not just a warning.",
+          "RFC 7208 caps the number of DNS-lookup-causing terms (include, a, mx, ptr, exists and the redirect modifier) at 10. This tool counts only the terms in the record you paste, not the lookups inside the records you include, so the real count can be higher. Exceeding it doesn't just weaken your SPF — it causes a permanent error, which many mail providers treat as an outright SPF failure for all your mail, not just a warning.",
       },
       {
         question: "What does an empty \"p=\" tag mean in DKIM?",
@@ -1638,6 +1723,11 @@ export const tools: Tool[] = [
         question: "Why does the \"ptr\" mechanism get flagged?",
         answer:
           "The \"ptr\" mechanism is explicitly discouraged in RFC 7208 itself due to its unreliability and the extra DNS load it creates — most modern SPF guidance recommends avoiding it entirely.",
+      },
+      {
+        question: "What does an \"Unknown term\" error mean?",
+        answer:
+          "SPF only allows the terms all, include, a, mx, ptr, exists, ip4 and ip6, and modifiers such as redirect= and exp=. A misspelling such as inlcude: is reported so it doesn't silently weaken your record.",
       },
     ],
   },
@@ -1680,7 +1770,7 @@ export const tools: Tool[] = [
       {
         question: "Will this break my link?",
         answer:
-          "Stripping tracking parameters doesn't affect where a URL points to — those parameters are read by analytics scripts, not by routing. The page itself will load exactly the same.",
+          "Usually not — tracking parameters are read by analytics scripts, not by routing, so the page normally loads the same. A few names on the list, such as si, are used by some sites for other purposes. If a cleaned link doesn't open the same page, turn that parameter back on.",
       },
     ],
   },
@@ -1705,7 +1795,7 @@ export const tools: Tool[] = [
     howTo: [
       "Paste a cURL command — from your terminal history or a browser's \"Copy as cURL\" option.",
       "Choose the target: fetch, Axios, or Python requests.",
-      "Copy the generated code and drop it straight into your project.",
+      "Check the \"Not converted\" note if one appears, then copy the generated code into your project.",
     ],
     faq: [
       {
@@ -1716,7 +1806,7 @@ export const tools: Tool[] = [
       {
         question: "What cURL flags are supported?",
         answer:
-          "The common ones: -X/--request, -H/--header, -d/--data (and its variants), -u/--user for basic auth, -b/--cookie, -A/--user-agent, and -G/--get for converting data into query params. Less common flags are safely ignored rather than breaking the parse.",
+          "The common ones: -X/--request, -H/--header, -d/--data (and its variants), --data-urlencode, --json, -I/--head, -u/--user for basic auth, -b/--cookie, -A/--user-agent, -e/--referer, --url, and -G/--get for converting data into query params. Options with no equivalent in the generated code, such as -F file uploads, proxies, timeouts and -k, are listed under the command as \"Not converted\" so you can check them.",
       },
       {
         question: "Why does the output include a Content-Type header I didn't specify?",
@@ -1763,6 +1853,11 @@ export const tools: Tool[] = [
         answer:
           "It formats the outer query's clauses cleanly, but content inside parentheses (subqueries, function calls) is kept on a single line rather than recursively reformatted — this keeps the tool predictable for everyday queries.",
       },
+      {
+        question: "What happens to comments?",
+        answer:
+          "Comments (-- text and /* text */) are kept. In the single-line version, a -- comment is rewritten as /* text */ so it can't hide the code after it. MySQL-style # comments aren't recognized, so remove them first.",
+      },
     ],
   },
   {
@@ -1796,12 +1891,12 @@ export const tools: Tool[] = [
       {
         question: "What YAML features are supported?",
         answer:
-          "Nested mappings and sequences, sequences of mappings (the common \"- name: value\" list-of-objects pattern), inline flow collections like [a, b, c] and {a: 1, b: 2}, quoted and unquoted strings, numbers, booleans, and null. Anchors, aliases, and multi-document files aren't supported.",
+          "Nested mappings and sequences, sequences of mappings (the common \"- name: value\" list-of-objects pattern), inline flow collections like [a, b, c] and {a: 1, b: 2}, quoted and unquoted strings, numbers, booleans, and null. Anchors and aliases, merge keys, block text (| and >), lists inside lists, values that continue over several lines and multi-document files aren't supported. For these the tool shows an error that names the line instead of guessing.",
       },
       {
         question: "Why did my unquoted \"yes\" or \"no\" stay a string instead of becoming a boolean?",
         answer:
-          "This tool follows the modern YAML 1.2 core schema, where only true/false are booleans — older YAML 1.1 tools also treated yes/no/on/off as booleans, which caused the infamous problem of country code \"NO\" (Norway) silently becoming false. Sticking to true/false avoids that trap.",
+          "This tool treats only true and false as booleans, as YAML 1.2 does. Older YAML 1.1 tools also treated yes/no/on/off as booleans, which caused the infamous problem of country code \"NO\" (Norway) silently becoming false. Sticking to true/false avoids that trap.",
       },
     ],
   },
@@ -1841,6 +1936,11 @@ export const tools: Tool[] = [
         question: "Does this resize or crop my actual image?",
         answer:
           "No — this only calculates ratios and generates CSS. It doesn't process any image file; you'd pair the generated CSS with your own image using object-fit: cover, as shown in the legacy snippet.",
+      },
+      {
+        question: "What if I enter decimals?",
+        answer:
+          "Decimal sizes are used as typed and shown as a ratio over 1, for example 1.91:1, so the CSS matches the exact ratio instead of a rounded one.",
       },
     ],
   },
@@ -1882,6 +1982,11 @@ export const tools: Tool[] = [
         answer:
           "A plain --force push overwrites whatever is on the remote, even if a teammate pushed new commits since you last fetched. --force-with-lease refuses to push if the remote has moved unexpectedly, protecting you from silently overwriting someone else's work.",
       },
+      {
+        question: "What if my commit message has quotes in it?",
+        answer:
+          "Messages are put in double quotes with quote marks, $ and backticks escaped, and paths with spaces are quoted too. The commands are written for bash, zsh and Git Bash, and quoting rules differ in other shells such as Windows cmd.",
+      },
     ],
   },
   {
@@ -1920,6 +2025,11 @@ export const tools: Tool[] = [
         question: "Why do tabs matter in a Compose file?",
         answer:
           "Compose files are YAML underneath, and the YAML spec disallows tab characters for indentation entirely — a file with a tab in its indentation will fail to parse rather than just looking slightly off.",
+      },
+      {
+        question: "Does the formatted version keep my comments?",
+        answer:
+          "No. The formatted version is rebuilt from the parsed file, so comments and blank lines aren't carried over, and the tool tells you when your file contains comments. Files that use anchors (&name, *name, <<:) or block text (command: |) show an error, because the YAML reader doesn't support them.",
       },
     ],
   },
@@ -1961,6 +2071,11 @@ export const tools: Tool[] = [
         answer:
           "No — matching and extraction both run locally in your browser using JavaScript's built-in regex engine. The tool doesn't send your logs to a server. Even so, redact tokens and other secrets before pasting logs into any online tool.",
       },
+      {
+        question: "Why is the page slow or frozen with my pattern?",
+        answer:
+          "A pattern with nested repeats, such as (a+)+$, can take a very long time on some lines, and there is no time limit. Test patterns on a few lines first and keep them as specific as you can.",
+      },
     ],
   },
   {
@@ -1994,12 +2109,17 @@ export const tools: Tool[] = [
       {
         question: "Is there a size limit?",
         answer:
-          "Very large pastes fall back to a simplified view rather than a detailed diff, since precise character-level comparison gets computationally expensive on huge inputs. Line and word mode comfortably handle much larger text than character mode.",
+          "Very large pastes fall back to a simplified view rather than a detailed diff, since precise character-level comparison gets computationally expensive on huge inputs. The limit is about 1,500 lines, 800 words or 1,500 characters in each text, depending on the mode, so line and word mode handle much larger text than character mode. Above the limit the whole first text is shown as removed and the whole second as added.",
       },
       {
         question: "Is my text uploaded anywhere?",
         answer:
           "No — the comparison runs in your browser, and the tool doesn't send what you paste to a server. Still, avoid pasting highly sensitive text, such as contract drafts, into any online tool.",
+      },
+      {
+        question: "How are the added and removed counts worked out?",
+        answer:
+          "They count lines in line view, words in word view and characters in character view. In word view the spaces between words aren't counted, so a spacing-only change shows in the highlighting but not in the counters.",
       },
     ],
   },
@@ -2033,12 +2153,17 @@ export const tools: Tool[] = [
       {
         question: "Why is my WAV export so much bigger than my MP3?",
         answer:
-          "WAV stores every sample uncompressed, so its size is driven by sample rate, bit depth, and channel count rather than a target bitrate — a 45-minute stereo WAV at 44.1kHz/16-bit can easily be 15-20x larger than the same episode exported as 96 kbps MP3.",
+          "WAV stores every sample uncompressed, so its size is driven by sample rate, bit depth, and channel count rather than a target bitrate — a 45-minute stereo WAV at 44.1kHz/16-bit is about 15 times larger than the same episode exported as 96 kbps MP3.",
       },
       {
         question: "Is this exact, down to the byte?",
         answer:
           "It's a close estimate based on the raw bitrate math — actual exported files vary slightly depending on your encoder, any variable bitrate settings, and embedded metadata like cover art or ID3 tags.",
+      },
+      {
+        question: "Why does my host show a different size?",
+        answer:
+          "This tool counts 1 MB as 1,048,576 bytes. Some hosts count 1,000,000 bytes per MB, which makes their figure about 5% larger for the same file.",
       },
     ],
   },
@@ -2079,6 +2204,16 @@ export const tools: Tool[] = [
         answer:
           "Yes — it follows standard CSV quoting rules, so a field like \"Smith, John\" wrapped in quotes is parsed as a single value rather than being split at the comma.",
       },
+      {
+        question: "Is matching case-sensitive?",
+        answer:
+          "Yes. Values must match exactly, so \"Ada@example.com\" and \"ada@example.com \" (with a trailing space) count as different. Clean up capitalization and spaces first.",
+      },
+      {
+        question: "What if my file uses semicolons or tabs?",
+        answer:
+          "Only commas separate values. A file separated by semicolons or tabs is read as a single column, and the tool tells you when a file looks like that.",
+      },
     ],
   },
   {
@@ -2117,6 +2252,11 @@ export const tools: Tool[] = [
         question: "Should I use CBR or VBR for streaming?",
         answer:
           "CBR (constant bitrate) is what both Twitch and YouTube recommend for live streaming — it keeps your output bitrate steady and predictable, which streaming platforms and viewers' players both handle far more reliably than the variable bitrate typically used for recorded video.",
+      },
+      {
+        question: "Where do these numbers come from?",
+        answer:
+          "They come from Twitch's broadcasting guidelines and YouTube's live encoder settings (the recommended H.264 column). A ≈ marks combinations the platforms don't publish, which are estimates. YouTube also lists lower minimums, so you can stream below the recommendation if your upload speed is limited, with lower quality. Check each platform's current help page.",
       },
     ],
   },
@@ -2158,6 +2298,11 @@ export const tools: Tool[] = [
         answer:
           "Not quite in every case — if your input starts with a number, the output will too (like \"10BestCoffeeShops\"), which isn't a valid JavaScript identifier. You'd want to prefix it with a letter or underscore before using it as a variable name.",
       },
+      {
+        question: "What about text in other alphabets?",
+        answer:
+          "Only the letters A to Z and the digits 0 to 9 are kept. Letters from other alphabets, such as Cyrillic, Arabic, Chinese or Greek, are dropped, so text written only in them gives an empty result, and the tool tells you so.",
+      },
     ],
   },
   {
@@ -2195,7 +2340,12 @@ export const tools: Tool[] = [
       {
         question: "Why do some pages share one size instead of being listed individually?",
         answer:
-          "PDF allows a page size to be set once on a shared parent node and inherited by every page under it, rather than repeated on each page — very common for documents where every page is the same size, like a standard Letter or A4 report.",
+          "PDF allows a page size to be set once on a shared parent node and inherited by every page under it, rather than repeated on each page — very common for documents where every page is the same size, like a standard Letter or A4 report. The size list is built from the size entries the tool finds, so the counts in it can add up to fewer pages than the page count.",
+      },
+      {
+        question: "Why is the page count higher than I expected?",
+        answer:
+          "A PDF saved with incremental updates can contain older versions of its pages, and the tool, which searches the file's text rather than reading it the way a PDF reader does, may count them again. Check the document properties in your PDF reader for the exact number.",
       },
     ],
   },
@@ -2230,12 +2380,17 @@ export const tools: Tool[] = [
       {
         question: "Is it ever okay to have more than one H1?",
         answer:
-          "The HTML5 spec technically permits multiple H1s within separate sectioning elements, and it's flagged here only as an informational note, not an error. That said, most SEO guidance still recommends a single H1 that clearly states the page's main topic.",
+          "HTML doesn't forbid more than one H1, so it's flagged here only as an informational note, not an error. That said, most SEO and accessibility guidance still recommends a single H1 that clearly states the page's main topic.",
       },
       {
         question: "Does this check visual heading size (like large bold text)?",
         answer:
           "No — it only looks at actual H1–H6 tags in the HTML. Text that's styled to look like a heading with CSS but isn't wrapped in a heading tag won't show up, and semantically that's exactly the kind of thing worth fixing.",
+      },
+      {
+        question: "Does it see headings added by JavaScript?",
+        answer:
+          "No. It reads the HTML you paste, so headings that a script adds after the page loads aren't seen. Headings inside comments, scripts and styles are ignored.",
       },
     ],
   },
